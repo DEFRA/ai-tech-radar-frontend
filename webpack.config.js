@@ -1,20 +1,23 @@
-import { createRequire } from 'node:module'
-import { fileURLToPath } from 'node:url'
-import path from 'path'
+import nodeModule from 'node:module'
+import path from 'node:path'
+import url from 'node:url'
+
 import CopyPlugin from 'copy-webpack-plugin'
-import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
-import WebpackAssetsManifest from 'webpack-assets-manifest'
+
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import { WebpackAssetsManifest } from 'webpack-assets-manifest'
 
 const { NODE_ENV = 'development' } = process.env
 
-const require = createRequire(import.meta.url)
-const dirname = path.dirname(fileURLToPath(import.meta.url))
+const require = nodeModule.createRequire(import.meta.url)
+const dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 const govukFrontendPath = path.dirname(
   require.resolve('govuk-frontend/package.json')
 )
+
+const ruleTypeAssetResource = 'asset/resource'
 
 export default {
   context: path.resolve(dirname, 'src/client'),
@@ -26,7 +29,7 @@ export default {
   experiments: {
     outputModule: true
   },
-  mode: NODE_ENV,
+  mode: NODE_ENV === 'production' ? 'production' : 'development',
   devtool: NODE_ENV === 'production' ? 'source-map' : 'inline-source-map',
   watchOptions: {
     aggregateTimeout: 200,
@@ -56,82 +59,57 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(js|mjs)$/,
+        test: /\.(js|mjs|scss)$/,
         loader: 'source-map-loader',
         enforce: 'pre'
       },
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          browserslistEnv: 'javascripts',
-          cacheDirectory: true,
-          extends: path.join(dirname, 'babel.config.cjs'),
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                // Apply bug fixes to avoid transforms
-                bugfixes: true,
-
-                // Apply smaller "loose" transforms for browsers
-                loose: true,
-
-                // Skip CommonJS modules transform
-                modules: false
-              }
-            ]
-          ]
-        },
-
-        // Flag loaded modules as side effect free
-        sideEffects: false
-      },
-      {
         test: /\.scss$/,
+        type: ruleTypeAssetResource,
+        generator: {
+          binary: false,
+          filename:
+            NODE_ENV === 'production'
+              ? 'stylesheets/[name].[contenthash:7].min.css'
+              : 'stylesheets/[name].css'
+        },
         use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              // Allow sass-loader to process CSS @import first
-              // before we use css-loader to extract `url()` etc
-              importLoaders: 2
-            }
-          },
           'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [
+                loadPaths: [
+                  path.join(dirname, 'src/client/stylesheets'),
                   path.join(dirname, 'src/server/common/components'),
-                  path.join(dirname, 'node_modules')
+                  path.join(dirname, 'src/server/common/templates/partials')
                 ],
-                quietDeps: true
-              }
+                quietDeps: true,
+                sourceMapIncludeSources: true,
+                style: 'expanded'
+              },
+              warnRuleAsWarning: true
             }
           }
         ]
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
-        type: 'asset/resource',
+        type: ruleTypeAssetResource,
         generator: {
           filename: 'assets/images/[name][ext]'
         }
       },
       {
         test: /\.(ico)$/,
-        type: 'asset/resource',
+        type: ruleTypeAssetResource,
         generator: {
           filename: 'assets/images/[name][ext]'
         }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        type: 'asset/resource',
+        type: ruleTypeAssetResource,
         generator: {
           filename: 'assets/fonts/[name][ext]'
         }
@@ -169,20 +147,29 @@ export default {
   plugins: [
     new CleanWebpackPlugin(),
     new WebpackAssetsManifest(),
-    new MiniCssExtractPlugin({
-      filename:
-        NODE_ENV === 'production'
-          ? 'stylesheets/[name].[contenthash:7].min.css'
-          : 'stylesheets/[name].css'
-    }),
     new CopyPlugin({
       patterns: [
         {
           from: path.join(govukFrontendPath, 'dist/govuk/assets'),
+          to: 'assets',
+          globOptions: {
+            ignore: [
+              path.join(govukFrontendPath, 'dist/govuk/assets/rebrand'),
+              path.join(govukFrontendPath, 'dist/govuk/assets/images')
+            ]
+          }
+        },
+        {
+          from: path.join(govukFrontendPath, 'dist/govuk/assets/rebrand'),
           to: 'assets'
         }
       ]
     })
   ],
+  stats: {
+    errorDetails: true,
+    loggingDebug: ['sass-loader'],
+    preset: 'minimal'
+  },
   target: 'browserslist:javascripts'
 }
