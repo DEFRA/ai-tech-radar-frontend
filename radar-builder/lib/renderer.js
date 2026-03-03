@@ -152,7 +152,7 @@ class RadarQuadrant {
         .attr('transform', `translate(${centerX}, ${centerY})`)
         .attr('fill', 'none')
         .attr('stroke', '#cbd5e0')
-        .attr('stroke-width', '2')
+        .attr('stroke-width', '1')
     }
   }
 
@@ -370,7 +370,6 @@ class RadarQuadrant {
       .attr('height', height)
       .attr('viewBox',
         `${-padding} ${-padding} ${width + padding * 2} ${height + padding * 2}`)
-      .attr('class', 'tech-radar-svg')
       .attr('preserveAspectRatio', 'xMidYMid meet')
 
     this.radarGroup = this.svg.append('g')
