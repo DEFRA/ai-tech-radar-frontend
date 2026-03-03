@@ -21,7 +21,7 @@ describe('#catchAll integration', () => {
     })
 
     expect(result).toEqual(
-      expect.stringContaining('Page not found | ai-tech-radar-frontend')
+      expect.stringContaining('Page not found | AICE Tech Radar')
     )
     expect(statusCode).toBe(statusCodes.HTTP_STATUS_NOT_FOUND)
   })

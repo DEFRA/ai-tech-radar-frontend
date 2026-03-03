@@ -1,0 +1,103 @@
+quadrants:
+  - Tools
+  - Frameworks
+  - Platforms
+  - Techniques
+
+rings:
+  - Endorse
+  - Pilot
+  - Assess
+  - 'Do Not Use'
+
+quadrant_entries:
+  Frameworks:
+    Endorse: []
+    Pilot: []
+    Assess:
+      - label: 1
+        title: "MCP"
+        description: "Model Context Protocol (MCP)"
+        link: "https://modelcontextprotocol.io/overview"
+        createdTimestamp: "2025-07-30T10:00:00Z"
+        updatedTimestamp: "2025-07-30T10:00:00Z"
+        active: true
+      - label: 2
+        title: "A2A"
+        description: "Agent-to-Agent communication framework for building systems where AI agents can interact and collaborate with each other."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+      - label: 3
+        title: "LangGraph"
+        description: "Framework for building stateful, multi-actor applications with large language models. Provides tools for creating complex workflows and agent systems with state management."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+      - label: 4
+        title: "RAG"
+        description: "Retrieval-Augmented Generation - A framework for enhancing large language models by retrieving relevant information from external knowledge bases to improve response accuracy and relevance."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+    'Do Not Use': []
+  Platforms:
+    Endorse: []
+    Pilot:
+      - label: 5
+        title: "AWS Bedrock"
+        description: "Managed service providing access to foundation models from leading AI companies including Anthropic Claude, Meta Llama, and Amazon Titan. Offers model customization, guardrails, and knowledge bases with enterprise-grade security and compliance."
+        link: "https://defra.github.io/ai-sdlc-tool-guidance/tool-guidance/aws-bedrock-summary"
+        createdTimestamp: "2025-08-05T10:00:00Z"
+        updatedTimestamp: "2025-08-05T10:00:00Z"
+        active: true
+      - label: 6
+        title: "Azure AI Foundry"
+        description: "Microsoft's managed platform for designing, building and running generative AI applications. Combines model catalog, multi-agent orchestration, managed compute and governance capabilities with private networking and enterprise security."
+        link: "https://defra.github.io/ai-sdlc-tool-guidance/tool-guidance/azure-ai-foundry-summary"
+        createdTimestamp: "2025-08-05T10:00:00Z"
+        updatedTimestamp: "2025-08-05T10:00:00Z"
+        active: true
+    Assess: []
+    'Do Not Use': []
+  Techniques:
+    Endorse:
+      - label: 7
+        title: "Structured Prompting"
+        description: "Systematic approach to designing prompts with clear structure, formatting, and instructions to improve AI model performance and consistency in responses."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+      - label: 8
+        title: "Meta Prompting"
+        description: "Advanced prompting technique where AI models are instructed to generate, refine, or optimize prompts themselves, creating a meta-level approach to prompt engineering."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+      - label: 9
+        title: "Context Engineering"
+        description: "Discipline focused on optimising the context provided to AI models, including context window management, information architecture, and relevance optimisation for improved model performance."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+    Pilot: []
+    Assess:
+      - label: 10
+        title: "Agentic Workflows"
+        description: "Design patterns and methodologies for creating autonomous AI agents that can perform complex tasks with minimal human intervention, including planning, execution, and self-correction."
+        link: ""
+        createdTimestamp: "2025-08-06T10:00:00Z"
+        updatedTimestamp: "2025-08-06T10:00:00Z"
+        active: true
+    'Do Not Use': []
+  Tools:
+    Endorse: []
+    Pilot: []
+    Assess: []
+    'Do Not Use': []

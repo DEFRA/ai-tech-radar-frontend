@@ -1,199 +1,163 @@
 # ai-tech-radar-frontend
 
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-tech-radar-frontend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-tech-radar-frontend)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-tech-radar-frontend&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-tech-radar-frontend)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-tech-radar-frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-tech-radar-frontend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_ai-tech-radar-frontend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DEFRA_ai-tech-radar-frontend)
 
-Core delivery platform Node.js Frontend Template.
+This repository contains the Tech Radar maintained by the Defra AI Capabilities and Enablement team (AICE) which can be deployed as a standalone service onto CDP.
 
-- [Requirements](#requirements)
-  - [Node.js](#nodejs)
-- [Server-side Caching](#server-side-caching)
-- [Redis](#redis)
-- [Local Development](#local-development)
-  - [Setup](#setup)
-  - [Development](#development)
-  - [Production](#production)
-  - [Npm scripts](#npm-scripts)
-  - [Update dependencies](#update-dependencies)
-  - [Formatting](#formatting)
-    - [Windows prettier issue](#windows-prettier-issue)
-- [Docker](#docker)
-  - [Development image](#development-image)
-  - [Production image](#production-image)
-  - [Docker Compose](#docker-compose)
-  - [Dependabot](#dependabot)
-  - [SonarCloud](#sonarcloud)
-- [Licence](#licence)
-  - [About the licence](#about-the-licence)
+This tech radar is a visual guide maintained by the AICE team that documents AI tools, frameworks, techniques and platforms under active consideration. Entries are organised into four quadrants:
+- Tools
+- Frameworks
+- Techniques
+- Platforms
 
-## Requirements
+Each entry is also assigned to one of four rings that indicate maturity and recommended usage:
+- Endorse
+- Trial
+- Assess
+- Hold
 
-### Node.js
+## Prerequisites
+- Docker
+- Docker Compose
+- Node.js (v24 LTS)
 
-Please install [Node.js](http://nodejs.org/) `>= v22` and [npm](https://nodejs.org/) `>= v9`. You will find it
-easier to use the Node Version Manager [nvm](https://github.com/creationix/nvm)
+## Environment variables
 
-To use the correct version of Node.js for this application, via nvm:
+The application loads environment variables from `.env` (local) and `compose/aws.env` (when using Compose). A minimal example is provided in `.env.example`.
 
-```bash
-cd ai-tech-radar-frontend
-nvm use
-```
+| Name | Default value | Required | Description |
+|-|-|-|-|
+| AWS_REGION | eu-west-2 | No | AWS region to access resources in. |
+| AWS_DEFAULT_REGION | eu-west-2 | No | Default AWS region to access resources in. |
+| AWS_ACCESS_KEY_ID | test | No | AWS Access Key ID. |
+| AWS_SECRET_ACCESS_KEY | test | No | AWS Secret Access Key. |
+| ACE_SLACK_CHANNEL_URL | "#" | No | URL for the ACE Slack channel used in the site contact link (leave empty to disable). |
 
-## Server-side Caching
-
-We use Catbox for server-side caching. By default the service will use CatboxRedis when deployed and CatboxMemory for
-local development.
-You can override the default behaviour by setting the `SESSION_CACHE_ENGINE` environment variable to either `redis` or
-`memory`.
-
-Please note: CatboxMemory (`memory`) is _not_ suitable for production use! The cache will not be shared between each
-instance of the service and it will not persist between restarts.
-
-## Redis
-
-Redis is an in-memory key-value store. Every instance of a service has access to the same Redis key-value store similar
-to how services might have a database (or MongoDB). All frontend services are given access to a namespaced prefixed that
-matches the service name. e.g. `my-service` will have access to everything in Redis that is prefixed with `my-service`.
-
-If your service does not require a session cache to be shared between instances or if you don't require Redis, you can
-disable setting `SESSION_CACHE_ENGINE=false` or changing the default value in `src/config/index.js`.
-
-## Proxy
-
-We are using forward-proxy which is set up by default. To make use of this: `import { fetch } from 'undici'` then
-because of the `setGlobalDispatcher(new ProxyAgent(proxyUrl))` calls will use the ProxyAgent Dispatcher
-
-If you are not using Wreck, Axios or Undici or a similar http that uses `Request`. Then you may have to provide the
-proxy dispatcher:
-
-To add the dispatcher to your own client:
-
-```javascript
-import { ProxyAgent } from 'undici'
-
-return await fetch(url, {
-  dispatcher: new ProxyAgent({
-    uri: proxyUrl,
-    keepAliveTimeout: 10,
-    keepAliveMaxTimeout: 10
-  })
-})
-```
-
-## Local Development
-
-### Setup
-
-Install application dependencies:
+Create a local `.env` from the example:
 
 ```bash
-npm install
+cp .env.example .env
 ```
 
-### Development
+## Running the application
 
-To run the application in `development` mode run:
+### Docker Compose
+
+This repository includes a Compose file (compose.yaml) that brings up the frontend together with Redis. The frontend service is named `ai-tech-radar-frontend` and listens on port 3000.
+
+Start the full local environment (builds images first):
 
 ```bash
-npm run dev
+docker compose up --build
 ```
 
-### Production
+Default environment files used by Compose: `compose/aws.env` and `.env`. The Compose configuration sets useful defaults such as `PORT=3000`, `NODE_ENV=development`, `REDIS_HOST=redis` and `LOCALSTACK_ENDPOINT=http://localstack:4566`.
 
-To mimic the application running in `production` mode locally run:
+Once running, open http://localhost:3000 in your browser.
+
+### Via NPM
+
+Use `nvm` to select the correct Node.js version if needed:
+
+```bash
+nvm use --lts
+```
+
+Install dependencies:
+
+```bash
+npm install --ignore-scripts
+```
+
+Start the app in development mode (builds radar assets and restarts on change):
+
+```bash
+npm run start:dev
+```
+
+Build the tech radar static assets (used by the site):
+
+```bash
+npm run build:tech-radar
+```
+
+Create a production build (webpack + radar generation):
+
+```bash
+npm run build
+```
+
+Run the compiled site in production mode locally:
 
 ```bash
 npm start
 ```
 
-### Npm scripts
+## Tech Radar Data
 
-All available Npm scripts can be seen in [package.json](./package.json)
-To view them in your command line run:
+The radar content is written in YAML at `src/tech-radar/radar.yaml`.
 
-```bash
-npm run
+- Top-level arrays: `quadrants` and `rings`.
+- Main content: `quadrant_entries` maps each quadrant to the four rings; each ring contains a list of entries.
+
+Each entry is a YAML object containing these fields:
+
+| Field | Type | Description |
+|-|-|-|
+| `label` | number | Small identifier shown on the radar |
+| `title` | string | Entry title |
+| `description` | string | Short description of the entry |
+| `link` | string | Optional URL for more information |
+| `createdTimestamp` | string (ISO 8601) | Creation timestamp |
+| `updatedTimestamp` | string (ISO 8601) | Last updated timestamp |
+| `active` | boolean | Whether the entry is active/visible |
+
+Example entry (shortened):
+
+```yaml
+quadrant_entries:
+	Frameworks:
+		Assess:
+			- label: 1
+				title: "MCP"
+				description: "Model Context Protocol (MCP)"
+				link: "https://modelcontextprotocol.io/overview"
+				createdTimestamp: "2025-07-30T10:00:00Z"
+				updatedTimestamp: "2025-07-30T10:00:00Z"
+				active: true
 ```
 
-### Update dependencies
+How to update:
 
-To update dependencies use [npm-check-updates](https://github.com/raineorshine/npm-check-updates):
-
-> The following script is a good start. Check out all the options on
-> the [npm-check-updates](https://github.com/raineorshine/npm-check-updates)
-
-```bash
-ncu --interactive --format group
-```
-
-### Formatting
-
-#### Windows prettier issue
-
-If you are having issues with formatting of line breaks on Windows update your global git config by running:
+1. Edit `src/tech-radar/radar.yaml` in your editor and add or modify entries under the appropriate quadrant and ring.
+2. Use ISO 8601 timestamps for `createdTimestamp` / `updatedTimestamp` and set `active` to `true` for visible entries.
+3. Regenerate the radar assets:
 
 ```bash
-git config --global core.autocrlf false
+npm run build:tech-radar
 ```
 
-## Docker
+During development the `start:dev` script runs the radar generator in watch mode so changes are rebuilt automatically; otherwise run `npm run build` or `npm run start:dev` to see updates locally.
 
-### Development image
+Generated assets are used by the site; the generator writes the build output into the public assets location (used by the app at runtime).
 
-> [!TIP]
-> For Apple Silicon users, you may need to add `--platform linux/amd64` to the `docker run` command to ensure
-> compatibility fEx: `docker build --platform=linux/arm64 --no-cache --tag ai-tech-radar-frontend`
+## Tests
 
-Build:
+### Test structure
+
+The tests have been structured into subfolders of `./tests` based on the type of test:
+- `unit` - unit tests for individual functions and modules
+- `integration` - integration tests for interactions between modules and with external services
+
+### Running tests
+
+To run the tests, use the following command:
 
 ```bash
-docker build --target development --no-cache --tag ai-tech-radar-frontend:development .
+npm test
 ```
-
-Run:
-
-```bash
-docker run -p 3000:3000 ai-tech-radar-frontend:development
-```
-
-### Production image
-
-Build:
-
-```bash
-docker build --no-cache --tag ai-tech-radar-frontend .
-```
-
-Run:
-
-```bash
-docker run -p 3000:3000 ai-tech-radar-frontend
-```
-
-### Docker Compose
-
-A local environment with:
-
-- Localstack for AWS services (S3, SQS)
-- Redis
-- MongoDB
-- This service.
-- A commented out backend example.
-
-```bash
-docker compose up --build -d
-```
-
-### Dependabot
-
-We have added an example dependabot configuration file to the repository. You can enable it by renaming
-the [.github/example.dependabot.yml](.github/example.dependabot.yml) to `.github/dependabot.yml`
-
-### SonarCloud
-
-Instructions for setting up SonarCloud can be found in [sonar-project.properties](./sonar-project.properties).
 
 ## Licence
 
@@ -207,8 +171,6 @@ The following attribution statement MUST be cited in your products and applicati
 
 ### About the licence
 
-The Open Government Licence (OGL) was developed by the Controller of Her Majesty's Stationery Office (HMSO) to enable
-information providers in the public sector to license the use and re-use of their information under a common open
-licence.
+The Open Government Licence (OGL) was developed by the Controller of His Majesty's Stationery Office (HMSO) to enable information providers in the public sector to license the use and re-use of their information under a common open licence.
 
 It is designed to encourage use and re-use of information freely and flexibly, with only a few conditions.

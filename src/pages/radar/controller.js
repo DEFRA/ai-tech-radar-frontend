@@ -8,11 +8,11 @@ import { statusCodes } from '../../constants/status-codes.js'
  *
  * @returns {import('@hapi/hapi').ResponseObject} The response object for the homepage
  */
-function getHomepage (_request, h) {
-  return h.view('home/page.njk')
+function getRadar (_request, h) {
+  return h.view('radar/page.njk')
     .code(statusCodes.HTTP_STATUS_OK)
 }
 
 export {
-  getHomepage
+  getRadar
 }
