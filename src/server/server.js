@@ -50,7 +50,7 @@ async function createServer () {
         },
         xss: 'enabled',
         noSniff: true,
-        xframe: true
+        xframe: 'sameorigin'
       }
     },
     router: {

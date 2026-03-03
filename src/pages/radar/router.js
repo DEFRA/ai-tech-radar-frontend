@@ -1,16 +1,16 @@
-import * as homeController from './controller.js'
+import * as radarController from './controller.js'
 
 const routes = [
   {
     method: 'GET',
     path: '/',
-    handler: homeController.getHomepage
+    handler: radarController.getRadar
   }
 ]
 
-const homeRouter = {
+const radarRouter = {
   plugin: {
-    name: 'homeRouter',
+    name: 'radarRouter',
     register (server) {
       server.route(routes)
     }
@@ -18,5 +18,5 @@ const homeRouter = {
 }
 
 export {
-  homeRouter
+  radarRouter
 }

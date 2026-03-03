@@ -162,6 +162,11 @@ export default {
         {
           from: path.join(govukFrontendPath, 'dist/govuk/assets/rebrand'),
           to: 'assets'
+        },
+        {
+          from: path.join(dirname, '.artifacts/tech-radar'),
+          to: 'assets/tech-radar/[name]-[contenthash:7][ext]',
+          noErrorOnMissing: true
         }
       ]
     })

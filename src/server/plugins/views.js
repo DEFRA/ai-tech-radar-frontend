@@ -55,7 +55,8 @@ const viewPlugin = {
 
         return `${assetPath}/${webpackAsset ?? asset}`
       },
-      serviceName: config.get('serviceName')
+      serviceName: config.get('serviceName'),
+      aceSlackChannel: config.get('aceSlackChannel')
     }
   }
 }

@@ -45,7 +45,7 @@ const config = convict({
   serviceName: {
     doc: 'Applications Service Name',
     format: String,
-    default: 'ai-tech-radar-frontend'
+    default: 'AICE Tech Radar'
   },
   root: {
     doc: 'Project root',
@@ -212,6 +212,12 @@ const config = convict({
       format: Boolean,
       default: isDevelopment
     }
+  },
+  aceSlackChannel: {
+    doc: 'Ask ACE Slack channel URL',
+    format: String,
+    default: '#',
+    env: 'ACE_SLACK_CHANNEL_URL'
   },
   tracing: {
     header: {
