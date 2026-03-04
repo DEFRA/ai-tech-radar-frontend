@@ -10,7 +10,7 @@ import { TechniquesViewModel } from './view-model.js'
  *
  * @returns {import('@hapi/hapi').ResponseObject} The response object representing the techniques page
  */
-function getTechniques (request, h) {
+function getTechniques (_request, h) {
   const model = TechniquesViewModel.fromRadarYaml(radar)
 
   return h.view('techniques/page.njk', { model })

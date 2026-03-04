@@ -27,61 +27,55 @@
       </div>
     </div>
 
-    <h2 class="govuk-heading-m govuk-!-margin-top-8">Current radar</h2>
-
-    <div class="govuk-grid-row govuk-!-margin-top-8 quadrant-row">
-      <div class="govuk-grid-column-one-half radar-quadrant" data-align="left">
-        <h2 class="govuk-heading-m"><a class="govuk-link" href="/tools">Tools</a></h2>
-        <object class="radar-svg" id="radar-tools" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.svg') }}">
-          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.png') }}" alt="Tools quadrant">
-        </object>
-      </div>
-
-      <div class="govuk-grid-column-one-half radar-quadrant" data-align="right">
-        <h2 class="govuk-heading-m"><a class="govuk-link" href="/frameworks">Frameworks</a></h2>
-        <object class="radar-svg" id="radar-frameworks" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.svg') }}">
-          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.png') }}" alt="Frameworks quadrant">
-        </object>
-      </div>
-    </div>
-
-    <div class="govuk-grid-row govuk-!-margin-top-2 radar-labels">
-      <div class="govuk-grid-column-one-half">
-        <div class="radar-ring-labels radar-ring-labels-left">
-          <span class="govuk-body radar-ring-label">Do Not Use</span>
-          <span class="govuk-body radar-ring-label">Assess</span>
-          <span class="govuk-body radar-ring-label">Pilot</span>
-          <span class="govuk-body radar-ring-label">Endorse</span>
-        </div>
-      </div>
-
-      <div class="govuk-grid-column-one-half">
-        <div class="radar-ring-labels radar-ring-labels-right">
-          <span class="govuk-body radar-ring-label">Endorse</span>
-          <span class="govuk-body radar-ring-label">Pilot</span>
-          <span class="govuk-body radar-ring-label">Assess</span>
-          <span class="govuk-body radar-ring-label">Do Not Use</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="govuk-grid-row govuk-!-margin-top-2 quadrant-row">
-      <div class="govuk-grid-column-one-half radar-quadrant" data-align="left">
-        <object class="radar-svg" id="radar-techniques" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.svg') }}">
-          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.png') }}" alt="Techniques quadrant">
-        </object>
-        <h2 class="govuk-heading-m"><a class="govuk-link" href="/techniques">Techniques</a></h2>
-      </div>
-
-      <div class="govuk-grid-column-one-half radar-quadrant" data-align="right">
-        <object class="radar-svg" id="radar-platforms" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-platforms.svg') }}">
-          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-platforms.png') }}" alt="Platforms quadrant">
-        </object>
-        <h2 class="govuk-heading-m"><a class="govuk-link" href="/platforms">Platforms</a></h2>
-      </div>
-    </div>
-
     <div class="govuk-grid-row govuk-!-margin-top-6">
+      <section class="govuk-!-margin-bottom-0">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              <div class="dfe-grid-container">
+                <a href="/tools" class="dfe-card">
+                  <div class="dfe-card-container">
+                    <h3 class="govuk-heading-m">
+                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Tools</span>
+                    </h3>
+                    <p class="govuk-body">Explore tooling used for AI development and deployment.</p>
+                  </div>
+                </a>
+
+                <a href="/platforms" class="dfe-card">
+                  <div class="dfe-card-container">
+                    <h3 class="govuk-heading-m">
+                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Platforms</span>
+                    </h3>
+                    <p class="govuk-body">Browse platforms that host or provide AI services.</p>
+                  </div>
+                </a>
+
+                <a href="/techniques" class="dfe-card">
+                  <div class="dfe-card-container">
+                    <h3 class="govuk-heading-m">
+                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Techniques</span>
+                    </h3>
+                    <p class="govuk-body">Read about AI techniques and approaches.</p>
+                  </div>
+                </a>
+
+                <a href="/frameworks" class="dfe-card">
+                  <div class="dfe-card-container">
+                    <h3 class="govuk-heading-m">
+                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Frameworks</span>
+                    </h3>
+                    <p class="govuk-body">Find frameworks and libraries for building AI solutions.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         {{ status_classifications() }}
       </div>
