@@ -48,7 +48,7 @@ const viewPlugin = {
     relativeTo: config.get('root'),
     path: 'src/pages',
     isCached: config.get('env') === 'production',
-    context: {
+    context: (request) => ({
       assetPath: `${assetPath}/assets`,
       getAssetPath (asset) {
         const webpackAsset = webpackManifest?.[asset]
@@ -56,8 +56,9 @@ const viewPlugin = {
         return `${assetPath}/${webpackAsset ?? asset}`
       },
       serviceName: config.get('serviceName'),
-      aceSlackChannel: config.get('aceSlackChannel')
-    }
+      aceSlackChannel: config.get('aceSlackChannel'),
+      cspNonce: request.plugins.blankie.nonces
+    })
   }
 }
 
