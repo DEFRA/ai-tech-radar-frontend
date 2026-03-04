@@ -20,4 +20,16 @@ describe('#contentSecurityPolicy', () => {
 
     expect(resp.headers['content-security-policy']).toBeDefined()
   })
+
+  test('Should include nonces in CSP header when enabled', async () => {
+    const resp = await server.inject({
+      method: 'GET',
+      url: '/'
+    })
+
+    const csp = resp.headers['content-security-policy'] || ''
+
+    expect(csp).toMatch(/script-src[^;]*'nonce-[^']+'/)
+    expect(csp).toMatch(/style-src[^;]*'nonce-[^']+'/)
+  })
 })
