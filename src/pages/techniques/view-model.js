@@ -18,11 +18,11 @@ class TechniquesViewModel {
    * @returns {TechniquesViewModel}
    */
   static fromRadarYaml (sourceRadar) {
-    const techniques = sourceRadar?.entries?.Techniques || {}
-    const ringsOrder = sourceRadar?.rings || []
+    const techniques = sourceRadar.entries.Techniques
+    const ringsOrder = sourceRadar.rings
 
     const rings = ringsOrder.map(ringName => {
-      const items = techniques[ringName] || []
+      const items = techniques[ringName]
       const entries = items.map(item => TechniquesViewModel._mapTechnique(item, ringName))
 
       return { name: ringName, entries }
