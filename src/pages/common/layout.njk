@@ -1,3 +1,5 @@
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+
 <!doctype html>
 <html lang="en" class="govuk-template govuk-template--rebranded">
   <head>
@@ -24,15 +26,16 @@
       </div>
     </header>
 
-    <section aria-label="Service information" class="govuk-service-navigation" data-module="govuk-service-navigation">
-      <div class="govuk-width-container">
-        <div class="govuk-service-navigation__container">
-          <span class="govuk-service-navigation__service-name">
-            <a href="/" class="govuk-service-navigation__link">{{ serviceName }}</a>
-          </span>
-        </div>
-      </div>
-    </section>
+    {{ govukServiceNavigation({
+      serviceName: serviceName,
+      serviceUrl: '/',
+      navigation: [
+        { href: '/tools', text: 'Tools', active: page == 'tools' },
+        { href: '/frameworks', text: 'Frameworks', active: page == 'frameworks' },
+        { href: '/techniques', text: 'Techniques', active: page == 'techniques' },
+        { href: '/platforms', text: 'Platforms', active: page == 'platforms' }
+      ]
+    }) }}
 
     <main class="govuk-main-wrapper" id="main-content">
       <div class="govuk-width-container">

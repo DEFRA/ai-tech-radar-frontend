@@ -3,7 +3,14 @@ import Joi from 'joi'
 const entrySchema = Joi.object({
   label: Joi.number().integer().required(),
   title: Joi.string().trim().required(),
-  description: Joi.string().allow('').trim().optional(),
+  id: Joi.string().trim().required(),
+  history: Joi.array().items(Joi.object({
+    ring: Joi.string().trim().required(),
+    reason: Joi.string().trim().required(),
+    nextSteps: Joi.string().trim().required(),
+    updatedTimestamp: Joi.date().iso().required()
+  }).label('HistoryEntry')).required(),
+  description: Joi.string().allow('').trim().required(),
   link: Joi.string().allow('').trim().optional(),
   createdTimestamp: Joi.date().iso().required(),
   updatedTimestamp: Joi.date().iso().required(),
@@ -27,4 +34,8 @@ const radarSchema = Joi.object({
     .required()
 }).required().label('Radar')
 
-export { entrySchema, quadrantGroupSchema, radarSchema }
+export {
+  entrySchema,
+  quadrantGroupSchema,
+  radarSchema
+}

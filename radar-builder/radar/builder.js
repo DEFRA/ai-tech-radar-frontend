@@ -43,7 +43,12 @@ async function buildRadar (entries) {
       const items = groups[ringName] || []
 
       for (const item of items) {
-        projected.push({ ...item, quadrant: quadrantIndex, ring: ringIndex })
+        projected.push({
+          ...item,
+          quadrant: quadrantIndex,
+          ring: ringIndex,
+          link: `/${quadrantName.toLowerCase()}#${item.id}`
+        })
       }
     }
 

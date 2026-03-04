@@ -17,84 +17,144 @@ quadrant_entries:
     Assess:
       - label: 1
         title: "MCP"
+        id: mcp
         description: "Model Context Protocol (MCP)"
         link: "https://modelcontextprotocol.io/overview"
         createdTimestamp: "2025-07-30T10:00:00Z"
         updatedTimestamp: "2025-07-30T10:00:00Z"
         active: true
+        history:
+          - ring: "Assess"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
       - label: 2
         title: "A2A"
+        id: a2a
         description: "Agent-to-Agent communication framework for building systems where AI agents can interact and collaborate with each other."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Assess"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
       - label: 3
         title: "LangGraph"
+        id: langgraph
         description: "Framework for building stateful, multi-actor applications with large language models. Provides tools for creating complex workflows and agent systems with state management."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Assess"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
       - label: 4
         title: "RAG"
+        id: rag
         description: "Retrieval-Augmented Generation - A framework for enhancing large language models by retrieving relevant information from external knowledge bases to improve response accuracy and relevance."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Assess"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
     'Do Not Use': []
   Platforms:
     Endorse: []
     Pilot:
       - label: 5
         title: "AWS Bedrock"
+        id: aws-bedrock
         description: "Managed service providing access to foundation models from leading AI companies including Anthropic Claude, Meta Llama, and Amazon Titan. Offers model customization, guardrails, and knowledge bases with enterprise-grade security and compliance."
         link: "https://defra.github.io/ai-sdlc-tool-guidance/tool-guidance/aws-bedrock-summary"
         createdTimestamp: "2025-08-05T10:00:00Z"
         updatedTimestamp: "2025-08-05T10:00:00Z"
         active: true
+        history:
+          - ring: "Pilot"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
       - label: 6
         title: "Azure AI Foundry"
+        id: azure-ai-foundry
         description: "Microsoft's managed platform for designing, building and running generative AI applications. Combines model catalog, multi-agent orchestration, managed compute and governance capabilities with private networking and enterprise security."
         link: "https://defra.github.io/ai-sdlc-tool-guidance/tool-guidance/azure-ai-foundry-summary"
         createdTimestamp: "2025-08-05T10:00:00Z"
         updatedTimestamp: "2025-08-05T10:00:00Z"
         active: true
+        history:
+          - ring: "Pilot"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
     Assess: []
     'Do Not Use': []
   Techniques:
     Endorse:
       - label: 7
         title: "Structured Prompting"
+        id: structured-prompting
         description: "Systematic approach to designing prompts with clear structure, formatting, and instructions to improve AI model performance and consistency in responses."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Endorse"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
       - label: 8
         title: "Meta Prompting"
+        id: meta-prompting
         description: "Advanced prompting technique where AI models are instructed to generate, refine, or optimize prompts themselves, creating a meta-level approach to prompt engineering."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Endorse"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
       - label: 9
         title: "Context Engineering"
+        id: context-engineering
         description: "Discipline focused on optimising the context provided to AI models, including context window management, information architecture, and relevance optimisation for improved model performance."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Endorse"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
     Pilot: []
     Assess:
       - label: 10
         title: "Agentic Workflows"
+        id: agentic-workflows
         description: "Design patterns and methodologies for creating autonomous AI agents that can perform complex tasks with minimal human intervention, including planning, execution, and self-correction."
         link: ""
         createdTimestamp: "2025-08-06T10:00:00Z"
         updatedTimestamp: "2025-08-06T10:00:00Z"
         active: true
+        history:
+          - ring: "Assess"
+            reason: "Lorem ipsum dolor sit amet."
+            nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            updatedTimestamp: "2026-03-03T00:00:00Z"
     'Do Not Use': []
   Tools:
     Endorse: []

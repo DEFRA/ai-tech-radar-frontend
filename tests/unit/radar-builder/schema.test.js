@@ -7,6 +7,15 @@ describe('#radarSchema', () => {
     title: 'JavaScript',
     description: 'Programming language',
     link: 'https://example.com',
+    id: 'javascript',
+    history: [
+      {
+        ring: 'Endorse',
+        reason: 'Initial entry',
+        nextSteps: 'None',
+        updatedTimestamp: validTimestamp
+      }
+    ],
     createdTimestamp: validTimestamp,
     updatedTimestamp: validTimestamp,
     active: true
@@ -133,6 +142,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       title: 'JavaScript',
       description: 'Programming language',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -160,6 +178,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 'not-a-number',
       title: 'JavaScript',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -187,6 +214,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 1,
       description: 'Programming language',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -214,6 +250,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 1,
       title: 'JavaScript',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: 'not-a-date',
       updatedTimestamp: validTimestamp,
       active: true
@@ -243,6 +288,15 @@ describe('#radarSchema', () => {
       title: 'JavaScript',
       description: '',
       link: 'https://example.com',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -272,6 +326,15 @@ describe('#radarSchema', () => {
       title: 'JavaScript',
       description: 'Programming language',
       link: '',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -295,17 +358,26 @@ describe('#radarSchema', () => {
     expect(error).toBeUndefined()
   })
 
-  test('should pass validation when entry description is omitted', () => {
-    const entryMinimal = {
+  test('should fail validation when entry description is omitted', () => {
+    const entryMissingDescription = {
       label: 1,
       title: 'JavaScript',
       link: 'https://example.com',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
     }
     const quadrantGroup = {
-      Endorse: [entryMinimal],
+      Endorse: [entryMissingDescription],
       Pilot: [validEntry],
       Assess: [validEntry],
       'Do Not Use': [validEntry]
@@ -320,7 +392,7 @@ describe('#radarSchema', () => {
       }
     }
     const { error } = radarSchema.validate(radar)
-    expect(error).toBeUndefined()
+    expect(error).toBeDefined()
   })
 
   test('should pass validation when entry link is omitted', () => {
@@ -328,6 +400,15 @@ describe('#radarSchema', () => {
       label: 1,
       title: 'JavaScript',
       description: 'Programming language',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -355,6 +436,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 1,
       title: 'JavaScript',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: 'yes'
@@ -406,6 +496,15 @@ describe('#radarSchema', () => {
       title: '  JavaScript  ',
       description: 'Programming language',
       link: 'https://example.com',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
