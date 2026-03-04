@@ -62,13 +62,7 @@ class EntryViewModel {
    * @returns {string} Formatted date
    */
   _formatGdsDate (iso) {
-    const date = dateFns.parseISO(iso)
-
-    if (!dateFns.isValid(date)) {
-      return 'Invalid date'
-    }
-
-    return dateFns.format(dateFns.parseISO(iso), 'd MMMM yyyy')
+    return dateFns.format(iso, 'd MMMM yyyy')
   }
 
   /**
@@ -80,7 +74,9 @@ class EntryViewModel {
    * @returns {EntryViewModel|null} View model or null if not found
    */
   static fromRadarYaml (entriesMap, entryId) {
-    return entriesMap[entryId]?.entry ? new EntryViewModel(entriesMap[entryId].entry) : null
+    return entriesMap[entryId]?.entry
+      ? new EntryViewModel(entriesMap[entryId].entry)
+      : null
   }
 }
 

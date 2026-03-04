@@ -5,7 +5,7 @@ import url from 'node:url'
 import YAML from 'yaml'
 
 import { buildRadar } from './radar/builder.js'
-import { radarSchema } from './radar/schema.js'
+import { validateRadar } from '../src/tech-radar/schema.js'
 import { exportAsPng, exportAsSvg } from './radar/exporter.js'
 
 const dirname = path.dirname(url.fileURLToPath(import.meta.url))
@@ -17,7 +17,7 @@ async function main (dest = '.artifacts/tech-radar/aice-tech-radar') {
   const file = await fs.readFile(path.join(dirname, '../src/tech-radar/radar.yaml'), 'utf-8')
   const data = YAML.parse(file)
 
-  const { value: validated, error } = radarSchema.validate(data, { abortEarly: false })
+  const { value: validated, error } = validateRadar(data)
 
   if (error) {
     throw new Error(`Invalid radar data: ${error.message}`)

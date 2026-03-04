@@ -18,7 +18,7 @@ class TechniquesViewModel {
    * @returns {TechniquesViewModel}
    */
   static fromRadarYaml (sourceRadar) {
-    const techniques = sourceRadar?.quadrant_entries?.Techniques || {}
+    const techniques = sourceRadar?.entries?.Techniques || {}
     const ringsOrder = sourceRadar?.rings || []
 
     const rings = ringsOrder.map(ringName => {

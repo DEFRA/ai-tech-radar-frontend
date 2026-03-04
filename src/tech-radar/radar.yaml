@@ -10,7 +10,7 @@ rings:
   - Assess
   - 'Do Not Use'
 
-quadrant_entries:
+entries:
   Frameworks:
     Endorse: []
     Pilot: []

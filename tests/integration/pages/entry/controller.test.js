@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { constants as statusCodes } from 'node:http2'
 
-describe('#entryController (integration)', () => {
+describe('#entryController', () => {
   let server
 
   beforeAll(async () => {
@@ -76,10 +76,17 @@ describe('#entryController (integration)', () => {
     expect(result).toEqual(expect.stringMatching(/govuk-tag--green[\s\S]*Endorse/))
   })
 
-  test('renders entry tools/bad-date with Invalid date for malformed timestamp', async () => {
-    const { statusCode, result } = await server.inject({ method: 'GET', url: '/tools/bad-date' })
+  test('renders entry tools/ai-tool with expected content and tag', async () => {
+    const { statusCode, result } = await server.inject({
+      method: 'GET',
+      url: '/tools/ai-tool'
+    })
 
     expect(statusCode).toBe(statusCodes.HTTP_STATUS_OK)
-    expect(result).toEqual(expect.stringMatching(/Invalid date/))
+
+    expect(result).toEqual(expect.stringMatching(/AI Tool/))
+    expect(result).toEqual(expect.stringMatching(/Example AI tool for demonstration purposes/))
+    expect(result).toEqual(expect.stringMatching(/1 December 2025/))
+    expect(result).toEqual(expect.stringMatching(/govuk-tag--green[\s\S]*Endorse/))
   })
 })

@@ -8,7 +8,7 @@ rings:
   - Pilot
   - Assess
   - "Do Not Use"
-quadrant_entries:
+entries:
   Frameworks:
     Endorse:
       - label: 1
@@ -66,13 +66,17 @@ quadrant_entries:
   Tools:
     Endorse:
       - label: 4
-        id: bad-date
-        title: "Bad Date"
-        description: "Entry with invalid timestamp"
+        id: ai-tool
+        title: "AI Tool"
+        description: "Example AI tool for demonstration purposes"
         link: ""
-        history: []
-        createdTimestamp: "not-a-date"
-        updatedTimestamp: "not-a-date"
+        history:
+          - ring: "Endorse"
+            reason: "Initial entry"
+            nextSteps: "Adopt"
+            updatedTimestamp: "2025-12-01T10:00:00Z"
+        createdTimestamp: "2025-12-01T10:00:00Z"
+        updatedTimestamp: "2025-12-01T10:00:00Z"
         active: true
     Pilot: []
     Assess: []

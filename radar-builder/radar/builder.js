@@ -30,7 +30,7 @@ async function _buildRadarQuadrant (quadrant, entries) {
 }
 
 async function buildRadar (entries) {
-  const { quadrants, rings, quadrant_entries: quadrantEntries } = entries
+  const { quadrants, rings, entries: quadrantEntries } = entries
 
   const svgs = []
 
