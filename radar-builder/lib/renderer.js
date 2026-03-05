@@ -8,8 +8,6 @@ import {
   checkBoundingBoxCollision
 } from './utils.js'
 
-// Items are represented as plain objects: { label, link?, title? }
-
 const DEFAULT_CONFIG = {
   svg: {
     width: 512,
@@ -292,7 +290,7 @@ class RadarQuadrant {
     let group
 
     if (link) {
-      groupWrapper = this.radarGroup.append('a').attr('href', link).attr('target', '_blank')
+      groupWrapper = this.radarGroup.append('a').attr('href', link).attr('target', '_top')
       group = groupWrapper.append('g').attr('class', 'blip-group')
     } else {
       group = this.radarGroup.append('g').attr('class', 'blip-group')

@@ -38,7 +38,9 @@ describe('views plugin', () => {
     test('Should provide correct context properties', async () => {
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
 
-      expect(viewPlugin.options.context).toEqual(
+      const ctx = viewPlugin.options.context()
+
+      expect(ctx).toEqual(
         expect.objectContaining({
           assetPath: '/public/assets',
           getAssetPath: expect.any(Function),
@@ -50,13 +52,53 @@ describe('views plugin', () => {
     test('Should provide correct assetPath in context', async () => {
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
 
-      expect(viewPlugin.options.context.assetPath).toBe('/public/assets')
+      const ctx = viewPlugin.options.context()
+
+      expect(ctx.assetPath).toBe('/public/assets')
     })
 
     test('Should provide correct serviceName in context', async () => {
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
 
-      expect(viewPlugin.options.context.serviceName).toBe('AICE Tech Radar')
+      const ctx = viewPlugin.options.context()
+
+      expect(ctx.serviceName).toBe('AICE Tech Radar')
+    })
+
+    test('Should expose cspNonce when Blankie is registered', async () => {
+      const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
+
+      const mockRequest = {
+        plugins: {
+          blankie: {
+            nonces: { script: 'sha256-abc', style: 'sha256-def' }
+          }
+        }
+      }
+
+      const ctx = viewPlugin.options.context(mockRequest)
+
+      expect(ctx.cspNonce).toEqual({ script: 'sha256-abc', style: 'sha256-def' })
+    })
+
+    test('Should have empty cspNonce when Blankie is not registered', async () => {
+      const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
+
+      const mockRequest = { plugins: {} }
+
+      const ctx = viewPlugin.options.context(mockRequest)
+
+      expect(ctx.cspNonce).toBeUndefined()
+    })
+
+    test('Should have empty cspNonce when Blankie registered but nonces not generated', async () => {
+      const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
+
+      const mockRequest = { plugins: { blankie: {} } }
+
+      const ctx = viewPlugin.options.context(mockRequest)
+
+      expect(ctx.cspNonce).toBeUndefined()
     })
   })
 
@@ -87,7 +129,8 @@ describe('views plugin', () => {
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
 
       // Test that getAssetPath uses the parsed manifest
-      expect(viewPlugin.options.context.getAssetPath('application.js')).toBe(
+      const ctx = viewPlugin.options.context()
+      expect(ctx.getAssetPath('application.js')).toBe(
         '/public/javascripts/application.abc123.js'
       )
     })
@@ -105,7 +148,7 @@ describe('views plugin', () => {
       }))
 
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
-      const { getAssetPath } = viewPlugin.options.context
+      const { getAssetPath } = viewPlugin.options.context()
 
       expect(getAssetPath('application.js')).toBe('/public/javascripts/application.abc123.js')
       expect(getAssetPath('stylesheets/application.scss')).toBe('/public/stylesheets/application.xyz789.css')
@@ -117,7 +160,7 @@ describe('views plugin', () => {
       }))
 
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
-      const { getAssetPath } = viewPlugin.options.context
+      const { getAssetPath } = viewPlugin.options.context()
 
       expect(getAssetPath('unknown-asset.png')).toBe('/public/unknown-asset.png')
     })
@@ -126,7 +169,7 @@ describe('views plugin', () => {
       mockReadFileSync.mockReturnValue(JSON.stringify({}))
 
       const { viewPlugin } = await import('../../../../src/server/plugins/views.js')
-      const { getAssetPath } = viewPlugin.options.context
+      const { getAssetPath } = viewPlugin.options.context()
 
       expect(getAssetPath('any-asset.js')).toBe('/public/any-asset.js')
     })

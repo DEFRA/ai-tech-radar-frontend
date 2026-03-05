@@ -30,7 +30,7 @@ async function _buildRadarQuadrant (quadrant, entries) {
 }
 
 async function buildRadar (entries) {
-  const { quadrants, rings, quadrant_entries: quadrantEntries } = entries
+  const { quadrants, rings, entries: quadrantEntries } = entries
 
   const svgs = []
 
@@ -43,7 +43,12 @@ async function buildRadar (entries) {
       const items = groups[ringName] || []
 
       for (const item of items) {
-        projected.push({ ...item, quadrant: quadrantIndex, ring: ringIndex })
+        projected.push({
+          ...item,
+          quadrant: quadrantIndex,
+          ring: ringIndex,
+          link: `/${quadrantName.toLowerCase()}#${item.id}`
+        })
       }
     }
 

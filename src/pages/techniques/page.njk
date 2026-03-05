@@ -1,0 +1,46 @@
+{% extends "common/layout.njk" %}
+{% from "common/status-classifications.njk" import status_classifications, ring_tag %}
+
+{% block title %}
+  <title>Techniques | {{ serviceName }}</title>
+{% endblock %}
+
+{% set page = 'techniques' %}
+
+{% block content %}
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Techniques</h1>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky" data-align="left">
+        <div class="radar-ring-labels radar-ring-labels-left">
+          <span class="govuk-body radar-ring-label">Do Not Use</span>
+          <span class="govuk-body radar-ring-label">Assess</span>
+          <span class="govuk-body radar-ring-label">Pilot</span>
+          <span class="govuk-body radar-ring-label">Endorse</span>
+        </div>
+
+        <object class="radar-svg" id="radar-techniques" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.svg') }}">
+          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.png') }}" alt="Techniques quadrant">
+        </object>
+
+        {{ status_classifications() }}
+      </div>
+
+      <div class="govuk-grid-column-one-half">
+        {% for ring in model.rings %}
+          {% if ring.entries and ring.entries | length > 0 %}
+            <h2 class="govuk-heading-m govuk-!-margin-top-4">{{ ring_tag(ring.name) }}</h2>
+            {% for entry in ring.entries %}
+              <section id="{{ entry.id }}" class="govuk-!-margin-top-3 radar-entry">
+                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">{{ entry.label }}. {{ entry.title }}</h3>
+                <p class="govuk-body-s govuk-!-margin-bottom-2">{{ entry.description }}</p>
+                <p class="govuk-!-margin-bottom-0"><a class="govuk-link" href="/{{ entry.quadrant | lower }}/{{ entry.id }}">Read more</a></p>
+              </section>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+{% endblock %}

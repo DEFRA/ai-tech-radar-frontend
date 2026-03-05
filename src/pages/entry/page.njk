@@ -1,0 +1,59 @@
+{% extends "common/layout.njk" %}
+{% from "common/status-classifications.njk" import ring_tag %}
+
+{% block title %}
+  <title>{{ model.entry.title }} | {{ serviceName }}</title>
+{% endblock %}
+
+{% set page = quadrantSlug %}
+
+{% block content %}
+  <a href="/{{ quadrantSlug }}" class="govuk-back-link">Back</a>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l govuk-!-margin-top-2">{{ model.entry.title }}</h1>
+      <p class="govuk-body">{{ model.entry.description }}</p>
+
+      <dl class="govuk-summary-list govuk-!-margin-top-4">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Created</dt>
+          <dd class="govuk-summary-list__value">{{ model.entry.createdTimestamp }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">Last Updated</dt>
+          <dd class="govuk-summary-list__value">{{ model.entry.updatedTimestamp }}</dd>
+        </div>
+      </dl>
+
+      <h2 class="govuk-heading-m govuk-!-margin-top-6">History</h2>
+      {% if model.history and model.history | length > 0 %}
+        <div class="govuk-!-margin-top-2">
+          {% for h in model.history %}
+            <div class="govuk-summary-card govuk-!-margin-bottom-3">
+              <div class="govuk-summary-card__title-wrapper">
+                <h2 class="govuk-summary-card__title">{{ h.updatedTimestamp }} {{ ring_tag(h.ring) }}</h2>
+              </div>
+              <div class="govuk-summary-card__content">
+                <dl class="govuk-summary-list">
+                  <div class="govuk-summary-list__row">
+                    <dt class="govuk-summary-list__key">Reason</dt>
+                    <dd class="govuk-summary-list__value">{{ h.reason }}</dd>
+                  </div>
+                  {% if h.nextSteps %}
+                    <div class="govuk-summary-list__row">
+                      <dt class="govuk-summary-list__key">Next steps</dt>
+                      <dd class="govuk-summary-list__value">{{ h.nextSteps }}</dd>
+                    </div>
+                  {% endif %}
+                </dl>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="govuk-body">No history available for this entry.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

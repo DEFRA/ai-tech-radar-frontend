@@ -20,6 +20,8 @@ const nunjucksEnvironment = nunjucks.configure(
 )
 
 const assetPath = config.get('assetPath')
+const serviceName = config.get('serviceName')
+const aceSlackChannel = config.get('aceSlackChannel')
 
 const manifestPath = path.join(
   config.get('root'),
@@ -29,6 +31,11 @@ const manifestPath = path.join(
 const webpackManifest = JSON.parse(
   fs.readFileSync(manifestPath, 'utf8')
 )
+
+const getAssetPath = (asset) => {
+  const webpackAsset = webpackManifest?.[asset]
+  return `${assetPath}/${webpackAsset ?? asset}`
+}
 
 const viewPlugin = {
   plugin: hapiVision,
@@ -48,16 +55,15 @@ const viewPlugin = {
     relativeTo: config.get('root'),
     path: 'src/pages',
     isCached: config.get('env') === 'production',
-    context: {
+    context: (request) => ({
       assetPath: `${assetPath}/assets`,
-      getAssetPath (asset) {
-        const webpackAsset = webpackManifest?.[asset]
-
-        return `${assetPath}/${webpackAsset ?? asset}`
-      },
-      serviceName: config.get('serviceName'),
-      aceSlackChannel: config.get('aceSlackChannel')
-    }
+      getAssetPath,
+      serviceName,
+      aceSlackChannel,
+      // Blankie generates nonces when configured with generateNonces: true
+      // Returns { script, style } when enabled, undefined otherwise
+      cspNonce: request?.plugins?.blankie?.nonces
+    })
   }
 }
 

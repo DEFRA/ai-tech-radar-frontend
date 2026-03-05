@@ -1,0 +1,83 @@
+quadrants:
+  - Tools
+  - Frameworks
+  - Platforms
+  - Techniques
+rings:
+  - Endorse
+  - Pilot
+  - Assess
+  - "Do Not Use"
+entries:
+  Frameworks:
+    Endorse:
+      - label: 1
+        id: mcp
+        title: "MCP"
+        description: "Model Context Protocol (MCP)"
+        link: "https://modelcontextprotocol.io/overview"
+        history:
+          - ring: "Assess"
+            reason: "Initial entry"
+            nextSteps: "Monitor"
+            updatedTimestamp: "2025-12-01T10:00:00Z"
+        createdTimestamp: "2025-12-01T10:00:00Z"
+        updatedTimestamp: "2025-12-01T10:00:00Z"
+        active: true
+    Pilot: []
+    Assess: []
+    "Do Not Use": []
+  Platforms:
+    Endorse: []
+    Pilot:
+      - label: 2
+        id: aws-bedrock
+        title: "AWS Bedrock"
+        description: "Managed platform for foundation models"
+        link: "https://example.com/aws-bedrock"
+        history:
+          - ring: "Pilot"
+            reason: "Under evaluation"
+            nextSteps: "Trial"
+            updatedTimestamp: "2025-12-01T10:00:00Z"
+        createdTimestamp: "2025-12-01T10:00:00Z"
+        updatedTimestamp: "2025-12-01T10:00:00Z"
+        active: true
+    Assess: []
+    "Do Not Use": []
+  Techniques:
+    Endorse:
+      - label: 3
+        id: structured-prompting
+        title: "Structured Prompting"
+        description: "Systematic approach to designing prompts"
+        link: ""
+        history:
+          - ring: "Endorse"
+            reason: "Initial entry"
+            nextSteps: "Adopt"
+            updatedTimestamp: "2025-12-01T10:00:00Z"
+        createdTimestamp: "2025-12-01T10:00:00Z"
+        updatedTimestamp: "2025-12-01T10:00:00Z"
+        active: true
+    Pilot: []
+    Assess: []
+    "Do Not Use": []
+  Tools:
+    Endorse:
+      - label: 4
+        id: ai-tool
+        title: "AI Tool"
+        description: "Example AI tool for demonstration purposes"
+        link: ""
+        history:
+          - ring: "Endorse"
+            reason: "Initial entry"
+            nextSteps: "Adopt"
+            updatedTimestamp: "2025-12-01T10:00:00Z"
+        createdTimestamp: "2025-12-01T10:00:00Z"
+        updatedTimestamp: "2025-12-01T10:00:00Z"
+        active: true
+    Pilot: []
+    Assess: []
+    "Do Not Use": []

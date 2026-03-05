@@ -1,3 +1,5 @@
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+
 <!doctype html>
 <html lang="en" class="govuk-template govuk-template--rebranded">
   <head>
@@ -14,6 +16,9 @@
     <link href="{{ getAssetPath('stylesheets/application.scss') }}" rel="stylesheet">
   </head>
   <body class="govuk-template__body govuk-template--rebranded">
+    <script nonce="{{ cspNonce.script }}">
+      document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');
+    </script>
     <header class="govuk-header" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
@@ -24,15 +29,16 @@
       </div>
     </header>
 
-    <section aria-label="Service information" class="govuk-service-navigation" data-module="govuk-service-navigation">
-      <div class="govuk-width-container">
-        <div class="govuk-service-navigation__container">
-          <span class="govuk-service-navigation__service-name">
-            <a href="/" class="govuk-service-navigation__link">{{ serviceName }}</a>
-          </span>
-        </div>
-      </div>
-    </section>
+    {{ govukServiceNavigation({
+      serviceName: serviceName,
+      serviceUrl: '/',
+      navigation: [
+        { href: '/tools', text: 'Tools', active: page == 'tools' },
+        { href: '/frameworks', text: 'Frameworks', active: page == 'frameworks' },
+        { href: '/techniques', text: 'Techniques', active: page == 'techniques' },
+        { href: '/platforms', text: 'Platforms', active: page == 'platforms' }
+      ]
+    }) }}
 
     <main class="govuk-main-wrapper" id="main-content">
       <div class="govuk-width-container">
@@ -44,11 +50,14 @@
       <div class="govuk-width-container">
         <div class="govuk-footer__meta">
           <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+            <p class="govuk-body">
+              If you have any questions or feedback about this radar, or its content, please contact the AICE team via Slack <a class="govuk-footer__link" href="{{ slackChannelUrl }}">#ask-ace</a>
+            </p>
           </div>
         </div>
       </div>
     </footer>
 
-    <script type="module" src="{{ getAssetPath('javascripts/application.js') }}"></script>
+    <script type="module" src="{{ getAssetPath('application.js') }}"></script>
   </body>
 </html>

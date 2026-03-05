@@ -1,4 +1,4 @@
-import { radarSchema } from '../../../radar-builder/radar/schema.js'
+import { validateRadar } from '../../../../src/tech-radar/schema.js'
 
 describe('#radarSchema', () => {
   const validTimestamp = '2025-12-01T10:00:00Z'
@@ -7,6 +7,15 @@ describe('#radarSchema', () => {
     title: 'JavaScript',
     description: 'Programming language',
     link: 'https://example.com',
+    id: 'javascript',
+    history: [
+      {
+        ring: 'Endorse',
+        reason: 'Initial entry',
+        nextSteps: 'None',
+        updatedTimestamp: validTimestamp
+      }
+    ],
     createdTimestamp: validTimestamp,
     updatedTimestamp: validTimestamp,
     active: true
@@ -22,7 +31,7 @@ describe('#radarSchema', () => {
   const validRadar = {
     quadrants: ['Tools', 'Languages', 'Frameworks', 'Practices'],
     rings: ['Endorse', 'Pilot', 'Assess', 'Do Not Use'],
-    quadrant_entries: {
+    entries: {
       Tools: validQuadrantGroup,
       Languages: validQuadrantGroup,
       Frameworks: validQuadrantGroup,
@@ -31,7 +40,7 @@ describe('#radarSchema', () => {
   }
 
   test('should pass validation with valid radar data', () => {
-    const { error, value } = radarSchema.validate(validRadar)
+    const { error, value } = validateRadar(validRadar)
     expect(error).toBeUndefined()
     expect(value).toBeDefined()
   })
@@ -41,7 +50,7 @@ describe('#radarSchema', () => {
       ...validRadar,
       quadrants: undefined
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -50,7 +59,7 @@ describe('#radarSchema', () => {
       ...validRadar,
       quadrants: ['Tools', 'Languages', 'Frameworks']
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -59,7 +68,7 @@ describe('#radarSchema', () => {
       ...validRadar,
       rings: undefined
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -68,36 +77,36 @@ describe('#radarSchema', () => {
       ...validRadar,
       rings: ['Endorse', 'Pilot', 'Assess']
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
-  test('should fail validation when quadrant_entries field is missing', () => {
+  test('should fail validation when entries field is missing', () => {
     const invalidRadar = {
       quadrants: validRadar.quadrants,
       rings: validRadar.rings
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
-  test('should fail validation when quadrant_entries does not have 4 keys', () => {
+  test('should fail validation when entries does not have 4 keys', () => {
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: validQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
-  test('should fail validation when quadrant_entries has more than 4 keys', () => {
+  test('should fail validation when entries has more than 4 keys', () => {
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: validQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
@@ -105,7 +114,7 @@ describe('#radarSchema', () => {
         Extra: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -118,14 +127,14 @@ describe('#radarSchema', () => {
     }
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: invalidQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -133,6 +142,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       title: 'JavaScript',
       description: 'Programming language',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -145,14 +163,14 @@ describe('#radarSchema', () => {
     }
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: invalidQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -160,6 +178,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 'not-a-number',
       title: 'JavaScript',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -172,14 +199,14 @@ describe('#radarSchema', () => {
     }
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: invalidQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -187,6 +214,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 1,
       description: 'Programming language',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -199,14 +235,14 @@ describe('#radarSchema', () => {
     }
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: invalidQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -214,6 +250,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 1,
       title: 'JavaScript',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: 'not-a-date',
       updatedTimestamp: validTimestamp,
       active: true
@@ -226,14 +271,14 @@ describe('#radarSchema', () => {
     }
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: invalidQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -243,6 +288,15 @@ describe('#radarSchema', () => {
       title: 'JavaScript',
       description: '',
       link: 'https://example.com',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -255,14 +309,14 @@ describe('#radarSchema', () => {
     }
     const radar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: quadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(radar)
+    const { error } = validateRadar(radar)
     expect(error).toBeUndefined()
   })
 
@@ -272,6 +326,15 @@ describe('#radarSchema', () => {
       title: 'JavaScript',
       description: 'Programming language',
       link: '',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -284,43 +347,52 @@ describe('#radarSchema', () => {
     }
     const radar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: quadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(radar)
+    const { error } = validateRadar(radar)
     expect(error).toBeUndefined()
   })
 
-  test('should pass validation when entry description is omitted', () => {
-    const entryMinimal = {
+  test('should fail validation when entry description is omitted', () => {
+    const entryMissingDescription = {
       label: 1,
       title: 'JavaScript',
       link: 'https://example.com',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
     }
     const quadrantGroup = {
-      Endorse: [entryMinimal],
+      Endorse: [entryMissingDescription],
       Pilot: [validEntry],
       Assess: [validEntry],
       'Do Not Use': [validEntry]
     }
     const radar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: quadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(radar)
-    expect(error).toBeUndefined()
+    const { error } = validateRadar(radar)
+    expect(error).toBeDefined()
   })
 
   test('should pass validation when entry link is omitted', () => {
@@ -328,6 +400,15 @@ describe('#radarSchema', () => {
       label: 1,
       title: 'JavaScript',
       description: 'Programming language',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -340,14 +421,14 @@ describe('#radarSchema', () => {
     }
     const radar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: quadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(radar)
+    const { error } = validateRadar(radar)
     expect(error).toBeUndefined()
   })
 
@@ -355,6 +436,15 @@ describe('#radarSchema', () => {
     const invalidEntry = {
       label: 1,
       title: 'JavaScript',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: 'yes'
@@ -367,14 +457,14 @@ describe('#radarSchema', () => {
     }
     const invalidRadar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: invalidQuadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error } = radarSchema.validate(invalidRadar)
+    const { error } = validateRadar(invalidRadar)
     expect(error).toBeDefined()
   })
 
@@ -382,9 +472,9 @@ describe('#radarSchema', () => {
     const radarWithWhitespace = {
       quadrants: ['  Tools  ', 'Languages', 'Frameworks', 'Practices'],
       rings: validRadar.rings,
-      quadrant_entries: validRadar.quadrant_entries
+      entries: validRadar.entries
     }
-    const { error, value } = radarSchema.validate(radarWithWhitespace)
+    const { error, value } = validateRadar(radarWithWhitespace)
     expect(error).toBeUndefined()
     expect(value.quadrants[0]).toBe('Tools')
   })
@@ -393,9 +483,9 @@ describe('#radarSchema', () => {
     const radarWithWhitespace = {
       quadrants: validRadar.quadrants,
       rings: ['  Endorse  ', '  Pilot  ', 'Assess', 'Do Not Use'],
-      quadrant_entries: validRadar.quadrant_entries
+      entries: validRadar.entries
     }
-    const { error, value } = radarSchema.validate(radarWithWhitespace)
+    const { error, value } = validateRadar(radarWithWhitespace)
     expect(error).toBeUndefined()
     expect(value.rings[0]).toBe('Endorse')
   })
@@ -406,6 +496,15 @@ describe('#radarSchema', () => {
       title: '  JavaScript  ',
       description: 'Programming language',
       link: 'https://example.com',
+      id: 'javascript',
+      history: [
+        {
+          ring: 'Endorse',
+          reason: 'Initial entry',
+          nextSteps: 'None',
+          updatedTimestamp: validTimestamp
+        }
+      ],
       createdTimestamp: validTimestamp,
       updatedTimestamp: validTimestamp,
       active: true
@@ -418,15 +517,15 @@ describe('#radarSchema', () => {
     }
     const radar = {
       ...validRadar,
-      quadrant_entries: {
+      entries: {
         Tools: quadrantGroup,
         Languages: validQuadrantGroup,
         Frameworks: validQuadrantGroup,
         Practices: validQuadrantGroup
       }
     }
-    const { error, value } = radarSchema.validate(radar)
+    const { error, value } = validateRadar(radar)
     expect(error).toBeUndefined()
-    expect(value.quadrant_entries.Tools.Endorse[0].title).toBe('JavaScript')
+    expect(value.entries.Tools.Endorse[0].title).toBe('JavaScript')
   })
 })
