@@ -16,7 +16,7 @@
     "build:webpack:watch": "NODE_ENV=development webpack --watch",
     "start": "NODE_ENV=production node --env-file-if-exists=.env --use-strict ./src/index.js",
     "start:dev": "NODE_ENV=development run-p build:watch server:watch",
-    "server:watch": "nodemon --env-file-if-exists=.env --watch src --ext js,njk --ignore src/client --exec 'node --env-file-if-exists=.env --use-strict ./src/index.js'",
+    "server:watch": "nodemon --env-file-if-exists=.env --watch src --watch .public --ext js,njk,yaml,json --ignore src/client --exec 'node --env-file-if-exists=.env --use-strict ./src/index.js'",
     "lint": "run-s lint:js lint:scss",
     "lint:js": "eslint .",
     "lint:scss": "stylelint \"src/**/*.scss\" --cache --cache-location .cache/stylelint --cache-strategy content --color --ignore-path .gitignore",
