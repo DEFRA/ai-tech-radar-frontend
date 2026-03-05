@@ -1,5 +1,6 @@
 {% extends "common/layout.njk" %}
 {% from "common/status-classifications.njk" import status_classifications, ring_tag %}
+{% from "common/radar-entries.njk" import radar_entries %}
 
 {% block title %}
   <title>Techniques | {{ serviceName }}</title>
@@ -14,8 +15,8 @@
       </div>
     </div>
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky" data-align="left">
-        <div class="radar-ring-labels radar-ring-labels-left">
+      <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
+        <div class="radar-ring-labels radar-ring-labels--reversed">
           <span class="govuk-body radar-ring-label">Do Not Use</span>
           <span class="govuk-body radar-ring-label">Assess</span>
           <span class="govuk-body radar-ring-label">Pilot</span>
@@ -30,17 +31,6 @@
       </div>
 
       <div class="govuk-grid-column-one-half">
-        {% for ring in model.rings %}
-          {% if ring.entries and ring.entries | length > 0 %}
-            <h2 class="govuk-heading-m govuk-!-margin-top-4">{{ ring_tag(ring.name) }}</h2>
-            {% for entry in ring.entries %}
-              <section id="{{ entry.id }}" class="govuk-!-margin-top-3 radar-entry">
-                <h3 class="govuk-heading-s govuk-!-margin-bottom-1">{{ entry.label }}. {{ entry.title }}</h3>
-                <p class="govuk-body-s govuk-!-margin-bottom-2">{{ entry.description }}</p>
-                <p class="govuk-!-margin-bottom-0"><a class="govuk-link" href="/{{ entry.quadrant | lower }}/{{ entry.id }}">Read more</a></p>
-              </section>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
+        {{ radar_entries(model.rings) }}
       </div>
 {% endblock %}
