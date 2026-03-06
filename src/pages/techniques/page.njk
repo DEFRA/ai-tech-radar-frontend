@@ -1,6 +1,6 @@
 {% extends "common/layout.njk" %}
 {% from "common/status-classifications.njk" import status_classifications, ring_tag %}
-{% from "common/radar-entries.njk" import radar_entries %}
+{% from "common/radar-entries.njk" import radar_entries, radar_ring_labels %}
 
 {% block title %}
   <title>Techniques | {{ serviceName }}</title>
@@ -16,12 +16,7 @@
     </div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
-        <div class="radar-ring-labels radar-ring-labels--reversed">
-          <span class="govuk-body radar-ring-label">Do Not Use</span>
-          <span class="govuk-body radar-ring-label">Assess</span>
-          <span class="govuk-body radar-ring-label">Pilot</span>
-          <span class="govuk-body radar-ring-label">Endorse</span>
-        </div>
+        {{ radar_ring_labels('reversed', ['Do Not Use', 'Assess', 'Pilot', 'Endorse']) }}
 
         <object class="radar-svg" id="radar-techniques" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.svg') }}">
           <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.png') }}" alt="Techniques quadrant">

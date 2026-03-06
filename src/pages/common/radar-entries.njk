@@ -1,5 +1,13 @@
 {% from "common/status-classifications.njk" import ring_tag %}
 
+{% macro radar_ring_labels(variant, labels) %}
+  <div class="radar-ring-labels radar-ring-labels--{{ variant }}">
+    {% for label in labels %}
+      <span class="govuk-body radar-ring-label">{{ label }}</span>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
 {% macro radar_entries(rings) %}
   {% for ring in rings %}
     {% if ring.entries and ring.entries | length > 0 %}

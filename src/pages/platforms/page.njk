@@ -1,7 +1,6 @@
 {% extends "common/layout.njk" %}
 {% from "common/status-classifications.njk" import status_classifications, ring_tag %}
-{% from "common/radar-entries.njk" import radar_entries %}
-{% from "common/radar-ring-labels.njk" import radar_ring_labels %}
+{% from "common/radar-entries.njk" import radar_entries, radar_ring_labels %}
 
 {% block title %}
   <title>Platforms | {{ serviceName }}</title>
@@ -29,4 +28,5 @@
       <div class="govuk-grid-column-one-half">
         {{ radar_entries(model.rings) }}
       </div>
+    </div>
 {% endblock %}
