@@ -11,7 +11,7 @@ import { PlatformsViewModel } from './view-model.js'
  * @returns {import('@hapi/hapi').ResponseObject} The response object representing the platforms page
  */
 
-function getPlatforms(_request, h) {
+function getPlatforms (_request, h) {
   const model = PlatformsViewModel.fromRadarYaml(radar)
 
   return h.view('platforms/page.njk', { model })
@@ -21,5 +21,5 @@ function getPlatforms(_request, h) {
 const platformsController = { getPlatforms }
 
 export {
-  platformsController 
+  platformsController
 }

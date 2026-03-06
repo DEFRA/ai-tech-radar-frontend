@@ -1,7 +1,5 @@
-import { platformsController }  from './controller.js'
-//import { platformsController } from '~/src/pages/platforms/controller.js'
+import { platformsController } from './controller.js'
 
-// refactored version
 const platformsRouter = {
   plugin: {
     name: 'platforms',
@@ -17,6 +15,6 @@ const platformsRouter = {
   }
 }
 
-export { 
+export {
   platformsRouter
 }
