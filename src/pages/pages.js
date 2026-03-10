@@ -2,6 +2,8 @@ import { radarRouter } from './radar/router.js'
 import { techniquesRouter } from './techniques/router.js'
 import { entryRouter } from './entry/router.js'
 import { platformsRouter } from './platforms/router.js'
+import { frameworksRouter } from './frameworks/router.js'
+import { toolsRouter } from './tools/router.js'
 
 const pageRouter = {
   plugin: {
@@ -11,7 +13,9 @@ const pageRouter = {
         radarRouter,
         techniquesRouter,
         entryRouter,
-        platformsRouter
+        platformsRouter,
+        frameworksRouter,
+        toolsRouter
       ])
     }
   }

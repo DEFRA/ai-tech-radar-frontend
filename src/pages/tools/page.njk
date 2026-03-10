@@ -1,0 +1,32 @@
+{% extends "common/layout.njk" %}
+{% from "common/status-classifications.njk" import status_classifications, ring_tag %}
+{% from "common/radar-entries.njk" import radar_entries, radar_ring_labels %}
+
+{% block title %}
+  <title>Tools | {{ serviceName }}</title>
+{% endblock %}
+
+{% set page = 'tools' %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Tools</h1>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
+      {{ radar_ring_labels('standard', ['Endorse', 'Pilot', 'Assess', 'Do Not Use']) }}
+
+      <object class="radar-svg" id="radar-tools" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.svg') }}">
+        <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.png') }}" alt="Tools quadrant">
+      </object>
+
+      {{ status_classifications() }}
+    </div>
+
+    <div class="govuk-grid-column-one-half">
+      {{ radar_entries(model.rings) }}
+    </div>
+  </div>
+{% endblock %}
