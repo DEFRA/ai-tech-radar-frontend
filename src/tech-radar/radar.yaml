@@ -159,8 +159,8 @@ entries:
   Tools:
     Endorse:
       - label: 11
-        title: "CoPilot"
-        id: copilot
+        title: "GitHub CoPilot"
+        id: github copilot
         description: "GitHub Copilot — AI-assisted code completion and developer productivity tool."
         link: "https://github.com/features/copilot"
         createdTimestamp: "2026-03-10T10:00:00Z"
@@ -168,7 +168,7 @@ entries:
         active: true
         history:
           - ring: "Endorse"
-            reason: "Proven to improve developer productivity and reduce routine coding effort."
+            reason: "Lorem ipsum dolor sit amet."
             nextSteps: "Monitor adoption, evaluate integration with internal workflows, and assess security/privacy impacts."
             updatedTimestamp: "2026-03-10T10:00:00Z"
     Pilot: []

@@ -14,13 +14,16 @@
       <h1 class="govuk-heading-l">Frameworks</h1>
     </div>
   </div>
-  <div class="govuk-grid-row">
+    <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
-      {{ radar_ring_labels('standard', ['Endorse', 'Pilot', 'Assess', 'Do Not Use']) }}
 
       <object class="radar-svg" id="radar-frameworks" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.svg') }}">
         <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.png') }}" alt="Frameworks quadrant">
       </object>
+
+      <div>
+        {{ radar_ring_labels('standard', ['Endorse', 'Pilot', 'Assess', 'Do Not Use']) }}
+      </div>
 
       {{ status_classifications() }}
     </div>
