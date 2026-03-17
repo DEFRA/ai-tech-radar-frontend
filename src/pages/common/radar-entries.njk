@@ -1,6 +1,13 @@
 {% from "common/status-classifications.njk" import ring_tag %}
 
-{% macro radar_ring_labels(variant, labels) %}
+{% macro radar_ring_labels(variant) %}
+  {% set ring_labels = ['Endorse', 'Pilot', 'Assess', 'Do Not Use'] %}
+  {% if variant == 'reversed' %}
+    {% set labels = ring_labels | reverse %}
+  {% else %}
+    {% set labels = ring_labels %}
+  {% endif %}
+
   <div class="radar-ring-labels radar-ring-labels--{{ variant }}">
     {% for label in labels %}
       <span class="govuk-body radar-ring-label">{{ label }}</span>
