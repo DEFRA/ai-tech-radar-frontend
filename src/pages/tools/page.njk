@@ -3,27 +3,25 @@
 {% from "common/radar-entries.njk" import radar_entries, radar_ring_labels %}
 
 {% block title %}
-  <title>Frameworks | {{ serviceName }}</title>
+  <title>Tools | {{ serviceName }}</title>
 {% endblock %}
 
-{% set page = 'frameworks' %}
+{% set page = 'tools' %}
 
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">Frameworks</h1>
+      <h1 class="govuk-heading-l">Tools</h1>
     </div>
   </div>
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
 
-      <object class="radar-svg" id="radar-frameworks" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.svg') }}">
-        <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.png') }}" alt="Frameworks quadrant">
+      <object class="radar-svg" id="radar-tools" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.svg') }}">
+        <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.png') }}" alt="Tools quadrant">
       </object>
 
-      <div>
-        {{ radar_ring_labels('standard', ['Endorse', 'Pilot', 'Assess', 'Do Not Use']) }}
-      </div>
+      {{ radar_ring_labels('reversed', ['Do Not Use', 'Assess', 'Pilot', 'Endorse']) }}
 
       {{ status_classifications() }}
     </div>
