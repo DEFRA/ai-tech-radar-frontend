@@ -1,4 +1,5 @@
 @use "govuk-frontend";
 
-@use "components/tech-radar";
-@use "components/card";
+@use 'variables';
+@use 'core';
+@use 'components';

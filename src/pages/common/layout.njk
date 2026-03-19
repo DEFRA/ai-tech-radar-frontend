@@ -1,63 +1,60 @@
-{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+{% extends "govuk/template.njk" %}
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 
-<!doctype html>
-<html lang="en" class="govuk-template govuk-template--rebranded">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    {% block title %}
-      {% if pageTitle %}
-        {% set title = pageTitle ~ ' | ' ~ serviceName %}
-      {% else %}
-        {% set title = serviceName %}
+{% block head %}
+  <link href="{{ getAssetPath('stylesheets/application.scss') }}" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+  <header class="defra-header" role="banner">
+    <div class="defra-header__inner">
+      <a href="/">
+        <img class="defra-header__logo" src="{{ getAssetPath('images/defra-logo.svg') }}" alt="Department for Environment, Food &amp; Rural Affairs">
+      </a>
+      <a href="/" class="defra-header__service-name">{{ serviceName }}</a>
+    </div>
+  </header>
+  <nav class="defra-service-navigation" aria-label="Service navigation">
+    <div class="defra-service-navigation__inner">
+      <ul class="defra-service-navigation__list">
+        <li><a class="defra-service-navigation__link" href="/" {% if page == 'home' %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a class="defra-service-navigation__link" href="/about" {% if page == 'about' %}aria-current="page"{% endif %}>About</a></li>
+      </ul>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block pageTitle %}
+  {{ pageTitle if pageTitle else serviceName }} | {{ serviceName }}
+{% endblock %}
+
+{% block main %}
+  <main class="app-main-wrapper" id="main-content">
+    {% block beforeContent %}{% endblock %}
+    {% block content %}{% endblock %}
+  </main>
+{% endblock %}
+
+{% block footer %}
+  <footer class="defra-footer" role="contentinfo">
+    <div class="govuk-width-container">
+      <ul class="govuk-list" style="display:flex;gap:24px;margin:0;flex-wrap:wrap;">
+        <li><a class="defra-footer__link" href="https://www.gov.uk/help/privacy-notice">Privacy</a></li>
+        <li><a class="defra-footer__link" href="https://www.gov.uk/help/cookies">Cookies</a></li>
+        <li><a class="defra-footer__link" href="https://www.gov.uk/help/accessibility-statement">Accessibility statement</a></li>
+      </ul>
+      {% if aceSlackChannel %}
+        <p class="govuk-body-s govuk-!-margin-top-3 govuk-!-margin-bottom-0" style="color:#505a5f;">
+          Questions? Contact the AICE team on Slack <a class="defra-footer__link" href="{{ aceSlackChannel }}">#ask-ace</a>
+        </p>
       {% endif %}
-      <title>{{ title }}</title>
-    {% endblock %}
-    <link href="{{ getAssetPath('stylesheets/application.scss') }}" rel="stylesheet">
-  </head>
-  <body class="govuk-template__body govuk-template--rebranded">
-    <script nonce="{{ cspNonce.script }}">
-      document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');
-    </script>
-    <header class="govuk-header" data-module="govuk-header">
-      <div class="govuk-header__container govuk-width-container">
-        <div class="govuk-header__logo">
-          <a href="/" class="govuk-header__link">
-            <span class="govuk-header__logo-container">Department<br>for Environment,<br>Food &amp; Rural Affairs</span>
-          </a>
-        </div>
-      </div>
-    </header>
+      <p class="govuk-body-s govuk-!-margin-top-3 govuk-!-margin-bottom-0" style="color:#505a5f;">
+        &copy; Crown copyright
+      </p>
+    </div>
+  </footer>
+{% endblock %}
 
-    {{ govukServiceNavigation({
-      serviceName: serviceName,
-      serviceUrl: '/',
-      navigation: [
-        { href: '/tools', text: 'Tools', active: page == 'tools' },
-        { href: '/frameworks', text: 'Frameworks', active: page == 'frameworks' },
-        { href: '/techniques', text: 'Techniques', active: page == 'techniques' },
-        { href: '/platforms', text: 'Platforms', active: page == 'platforms' }
-      ]
-    }) }}
-
-    <main class="govuk-main-wrapper" id="main-content">
-      <div class="govuk-width-container">
-        {% block content %}{% endblock %}
-      </div>
-    </main>
-
-    <footer class="govuk-footer">
-      <div class="govuk-width-container">
-        <div class="govuk-footer__meta">
-          <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-            <p class="govuk-body">
-              If you have any questions or feedback about this radar, or its content, please contact the AICE team via Slack <a class="govuk-footer__link" href="{{ aceSlackChannel }}">#ask-ace</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script type="module" src="{{ getAssetPath('application.js') }}"></script>
-  </body>
-</html>
+{% block bodyEnd %}
+  <script type="module" src="{{ getAssetPath('application.js') }}"></script>
+{% endblock %}

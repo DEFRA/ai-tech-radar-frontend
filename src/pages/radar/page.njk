@@ -6,16 +6,68 @@
 {% endblock %}
 
 {% block content %}
-    <div class="govuk-grid-row">
+  <div class="defra-hero">
+    <div class="govuk-width-container">
+      <h1 class="govuk-heading-xl">AI Capabilities and Enablement (AICE) Technology Radar</h1>
+      <p class="govuk-body-l">
+        This is a visual guide to the AI tools, frameworks, techniques and platforms the AI Capabilities and Enablement (AICE) team are currently exploring.
+      </p>
+    </div>
+  </div>
+
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row govuk-!-margin-top-6">
+      <div class="govuk-grid-column-full">
+        <div class="dfe-grid-container">
+          <a href="/tools" class="dfe-card">
+            <div class="dfe-card-container">
+              <h3 class="govuk-heading-m">
+                <span class="dfe-card-link--header">Tools</span>
+              </h3>
+              <p class="govuk-body">Explore tooling used for AI development and deployment.</p>
+            </div>
+          </a>
+
+          <a href="/platforms" class="dfe-card">
+            <div class="dfe-card-container">
+              <h3 class="govuk-heading-m">
+                <span class="dfe-card-link--header">Platforms</span>
+              </h3>
+              <p class="govuk-body">Browse platforms that host or provide AI services.</p>
+            </div>
+          </a>
+
+          <a href="/techniques" class="dfe-card">
+            <div class="dfe-card-container">
+              <h3 class="govuk-heading-m">
+                <span class="dfe-card-link--header">Techniques</span>
+              </h3>
+              <p class="govuk-body">Read about AI techniques and approaches.</p>
+            </div>
+          </a>
+
+          <a href="/frameworks" class="dfe-card">
+            <div class="dfe-card-container">
+              <h3 class="govuk-heading-m">
+                <span class="dfe-card-link--header">Frameworks</span>
+              </h3>
+              <p class="govuk-body">Find frameworks and libraries for building AI solutions.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row govuk-!-margin-top-6">
+      <div class="govuk-grid-column-two-thirds">
+        {{ status_classifications() }}
+      </div>
+    </div>
+
+    <div class="govuk-grid-row govuk-!-margin-top-2">
       <div class="govuk-grid-column-three-quarters">
-        <h1 class="govuk-heading-l">AI Capabilities and Enablement (AICE) Technology Radar</h1>
-        <p class="govuk-body-m">
-          This is a visual guide to the AI tools, frameworks, techniques and platforms the AI Capabilities and Enablement (AICE) team are currently exploring.
-        </p>
         <h2 class="govuk-heading-m">Who is this for?</h2>
-        <p class="govuk-body-m govuk-!-margin-bottom-2">The intended audience of this radar is professions within Defra Digital Delivery who need to see the current state of AI tooling.
-          This includes, but is not limited to:
-        </p>
+        <p class="govuk-body-m govuk-!-margin-bottom-2">The intended audience of this radar is professions within Defra Digital Delivery who need to see the current state of AI tooling. This includes, but is not limited to:</p>
         <ul class="govuk-list govuk-list--bullet">
           <li>Software developers</li>
           <li>QA engineers and testers</li>
@@ -27,59 +79,6 @@
       </div>
     </div>
 
-    <div class="govuk-grid-row govuk-!-margin-top-6">
-      <section class="govuk-!-margin-bottom-0">
-        <div class="govuk-width-container">
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-              <div class="dfe-grid-container">
-                <a href="/tools" class="dfe-card">
-                  <div class="dfe-card-container">
-                    <h3 class="govuk-heading-m">
-                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Tools</span>
-                    </h3>
-                    <p class="govuk-body">Explore tooling used for AI development and deployment.</p>
-                  </div>
-                </a>
-
-                <a href="/platforms" class="dfe-card">
-                  <div class="dfe-card-container">
-                    <h3 class="govuk-heading-m">
-                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Platforms</span>
-                    </h3>
-                    <p class="govuk-body">Browse platforms that host or provide AI services.</p>
-                  </div>
-                </a>
-
-                <a href="/techniques" class="dfe-card">
-                  <div class="dfe-card-container">
-                    <h3 class="govuk-heading-m">
-                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Techniques</span>
-                    </h3>
-                    <p class="govuk-body">Read about AI techniques and approaches.</p>
-                  </div>
-                </a>
-
-                <a href="/frameworks" class="dfe-card">
-                  <div class="dfe-card-container">
-                    <h3 class="govuk-heading-m">
-                      <span class="govuk-link govuk-link--no-visited-state dfe-card-link--header">Frameworks</span>
-                    </h3>
-                    <p class="govuk-body">Find frameworks and libraries for building AI solutions.</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds">
-        {{ status_classifications() }}
-      </div>
-    </div>
     <div class="govuk-grid-row govuk-!-margin-top-2">
       <div class="govuk-grid-column-three-quarters">
         <h2 class="govuk-heading-m">Who owns this radar?</h2>
@@ -89,6 +88,7 @@
         </p>
       </div>
     </div>
+
     <div class="govuk-grid-row govuk-!-margin-top-2">
       <div class="govuk-grid-column-three-quarters">
         <h2 class="govuk-heading-m">How does this relate to the Defra Tools Radar?</h2>
@@ -98,4 +98,5 @@
         </p>
       </div>
     </div>
+  </div>
 {% endblock %}
