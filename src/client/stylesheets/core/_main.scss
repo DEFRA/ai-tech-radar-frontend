@@ -1,0 +1,13 @@
+@use 'govuk-frontend' as *;
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.govuk-grid-column-two-thirds,
+.govuk-grid-column-full {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

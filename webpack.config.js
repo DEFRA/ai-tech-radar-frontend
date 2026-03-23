@@ -97,21 +97,21 @@ export default {
         test: /\.(png|svg|jpe?g|gif)$/,
         type: ruleTypeAssetResource,
         generator: {
-          filename: 'assets/images/[name][ext]'
+          filename: 'images/[name][ext]'
         }
       },
       {
         test: /\.(ico)$/,
         type: ruleTypeAssetResource,
         generator: {
-          filename: 'assets/images/[name][ext]'
+          filename: 'images/[name][ext]'
         }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         type: ruleTypeAssetResource,
         generator: {
-          filename: 'assets/fonts/[name][ext]'
+          filename: 'fonts/[name][ext]'
         }
       }
     ]
@@ -164,9 +164,12 @@ export default {
           to: 'assets'
         },
         {
+          from: path.join(dirname, 'src/client/images'),
+          to: 'images'
+        },
+        {
           from: path.join(dirname, '.artifacts/tech-radar'),
-          to: 'assets/tech-radar/[name]-[contenthash:7][ext]',
-          noErrorOnMissing: true
+          to: 'images/[name]-[contenthash:7][ext]'
         }
       ]
     })

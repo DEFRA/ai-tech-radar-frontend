@@ -7,29 +7,36 @@
 {% endblock %}
 
 {% set page = 'frameworks' %}
+{% set pageTitle = 'Frameworks' %}
+{% set breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: 'Frameworks' }
+] %}
 
 {% block content %}
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">Frameworks</h1>
-    </div>
-  </div>
+  <div class="govuk-width-container">
     <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Frameworks</h1>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
 
-      <object class="radar-svg" id="radar-frameworks" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.svg') }}">
-        <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-frameworks.png') }}" alt="Frameworks quadrant">
-      </object>
+        <object class="radar-svg" id="radar-frameworks" type="image/svg+xml" data="{{ getAssetPath('images/aice-tech-radar-frameworks.svg') }}">
+          <img src="{{ getAssetPath('images/aice-tech-radar-frameworks.png') }}" alt="Frameworks quadrant">
+        </object>
 
-      <div>
-        {{ radar_ring_labels('standard') }}
+        <div>
+          {{ radar_ring_labels('standard') }}
+        </div>
+
+        {{ status_classifications() }}
       </div>
 
-      {{ status_classifications() }}
-    </div>
-
-    <div class="govuk-grid-column-one-half">
-      {{ radar_entries(model.rings) }}
+      <div class="govuk-grid-column-one-half">
+        {{ radar_entries(model.rings) }}
+      </div>
     </div>
   </div>
 {% endblock %}
