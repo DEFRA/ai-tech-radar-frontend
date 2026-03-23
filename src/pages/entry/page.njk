@@ -6,10 +6,20 @@
 {% endblock %}
 
 {% set page = quadrantSlug %}
+{% set quadrantNames = {
+  'frameworks': 'Frameworks',
+  'platforms': 'Platforms',
+  'tools': 'Tools',
+  'techniques': 'Techniques'
+} %}
+{% set breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: quadrantNames[quadrantSlug], href: '/' + quadrantSlug },
+  { text: model.entry.title }
+] %}
+{% set pageTitle = model.entry.title %}
 
 {% block content %}
-  <a href="/{{ quadrantSlug }}" class="govuk-back-link">Back</a>
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l govuk-!-margin-top-2">{{ model.entry.title }}</h1>

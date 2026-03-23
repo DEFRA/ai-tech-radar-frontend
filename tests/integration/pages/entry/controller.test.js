@@ -89,4 +89,17 @@ describe('#entryController', () => {
     expect(result).toEqual(expect.stringMatching(/1 December 2025/))
     expect(result).toEqual(expect.stringMatching(/govuk-tag--green[\s\S]*Endorse/))
   })
+
+  test('renders breadcrumbs with home and entry navigation', async () => {
+    const { result } = await server.inject({
+      method: 'GET',
+      url: '/frameworks/mcp'
+    })
+
+    expect(result).toEqual(expect.stringMatching(/govuk-breadcrumbs/))
+    expect(result).toEqual(expect.stringMatching(/href="\/"/))
+    expect(result).toEqual(expect.stringMatching(/Home/))
+    expect(result).toEqual(expect.stringMatching(/href="\/frameworks"/))
+    expect(result).toEqual(expect.stringMatching(/Frameworks/))
+  })
 })

@@ -1,6 +1,8 @@
 @use 'defra-header';
-@use 'defra-service-navigation';
 @use 'defra-footer';
-@use 'defra-hero'; 
-@use 'card';
+@use 'defra-layout';
+@use 'defra-navigation'; 
+@use 'defra-service-navigation';
+@use 'defra-tiles';
+@use 'landing-page';
 @use 'tech-radar';

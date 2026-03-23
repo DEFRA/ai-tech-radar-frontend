@@ -1,9 +1,7 @@
 {% extends "common/layout.njk" %}
 {% from "common/status-classifications.njk" import status_classifications %}
 
-{% block title %}
-  <title>Home | {{ serviceName }}</title>
-{% endblock %}
+{% set pageTitle = 'Home' %}
 
 {% block content %}
   <div class="defra-hero">
@@ -18,49 +16,39 @@
   <div class="govuk-width-container">
     <div class="govuk-grid-row govuk-!-margin-top-6">
       <div class="govuk-grid-column-full">
-        <div class="dfe-grid-container">
-          <a href="/tools" class="dfe-card">
-            <div class="dfe-card-container">
-              <h3 class="govuk-heading-m">
-                <span class="dfe-card-link--header">Tools</span>
-              </h3>
-              <p class="govuk-body">Explore tooling used for AI development and deployment.</p>
-            </div>
-          </a>
+        <div class="defra-tile-grid">
+          <div class="defra-tile">
+            <span class="govuk-caption-m">Radar section</span>
+            <h2 class="govuk-heading-m defra-tile__title">
+              <a href="/tools" class="defra-tile__link">Tools</a>
+            </h2>
+            <p class="govuk-body defra-tile__body">Explore tooling used for AI development and deployment.</p>
+          </div>
 
-          <a href="/platforms" class="dfe-card">
-            <div class="dfe-card-container">
-              <h3 class="govuk-heading-m">
-                <span class="dfe-card-link--header">Platforms</span>
-              </h3>
-              <p class="govuk-body">Browse platforms that host or provide AI services.</p>
-            </div>
-          </a>
+          <div class="defra-tile">
+            <span class="govuk-caption-m">Radar section</span>
+            <h2 class="govuk-heading-m defra-tile__title">
+              <a href="/platforms" class="defra-tile__link">Platforms</a>
+            </h2>
+            <p class="govuk-body defra-tile__body">Browse platforms that host or provide AI services.</p>
+          </div>
 
-          <a href="/techniques" class="dfe-card">
-            <div class="dfe-card-container">
-              <h3 class="govuk-heading-m">
-                <span class="dfe-card-link--header">Techniques</span>
-              </h3>
-              <p class="govuk-body">Read about AI techniques and approaches.</p>
-            </div>
-          </a>
+          <div class="defra-tile">
+            <span class="govuk-caption-m">Radar section</span>
+            <h2 class="govuk-heading-m defra-tile__title">
+              <a href="/techniques" class="defra-tile__link">Techniques</a>
+            </h2>
+            <p class="govuk-body defra-tile__body">Read about AI techniques and approaches.</p>
+          </div>
 
-          <a href="/frameworks" class="dfe-card">
-            <div class="dfe-card-container">
-              <h3 class="govuk-heading-m">
-                <span class="dfe-card-link--header">Frameworks</span>
-              </h3>
-              <p class="govuk-body">Find frameworks and libraries for building AI solutions.</p>
-            </div>
-          </a>
+          <div class="defra-tile">
+            <span class="govuk-caption-m">Radar section</span>
+            <h2 class="govuk-heading-m defra-tile__title">
+              <a href="/frameworks" class="defra-tile__link">Frameworks</a>
+            </h2>
+            <p class="govuk-body defra-tile__body">Find frameworks and libraries for building AI solutions.</p>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="govuk-grid-row govuk-!-margin-top-6">
-      <div class="govuk-grid-column-two-thirds">
-        {{ status_classifications() }}
       </div>
     </div>
 
@@ -76,6 +64,12 @@
           <li>Product and delivery managers</li>
           <li>User researchers</li>
         </ul>
+      </div>
+    </div>
+
+    <div class="govuk-grid-row govuk-!-margin-top-2">
+      <div class="govuk-grid-column-two-thirds">
+        {{ status_classifications() }}
       </div>
     </div>
 

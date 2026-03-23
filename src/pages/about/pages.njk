@@ -4,6 +4,12 @@
   <title>About | {{ serviceName }}</title>
 {% endblock %}
 
+{% set pageTitle = 'About' %}
+{% set breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: 'About' }
+] %}
+
 {% block content %}
   <div class="govuk-width-container">
     <h1 class="govuk-heading-xl">About</h1>

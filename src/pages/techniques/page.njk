@@ -7,8 +7,14 @@
 {% endblock %}
 
 {% set page = 'techniques' %}
+{% set pageTitle = 'Techniques' %}
+{% set breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: 'Techniques' }
+] %}
 
 {% block content %}
+  <div class="govuk-width-container">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Techniques</h1>
@@ -18,8 +24,8 @@
       <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
         {{ radar_ring_labels('reversed') }}
 
-        <object class="radar-svg" id="radar-techniques" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.svg') }}">
-          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-techniques.png') }}" alt="Techniques quadrant">
+        <object class="radar-svg" id="radar-techniques" type="image/svg+xml" data="{{ getAssetPath('images/aice-tech-radar-techniques.svg') }}">
+          <img src="{{ getAssetPath('images/aice-tech-radar-techniques.png') }}" alt="Techniques quadrant">
         </object>
 
         {{ status_classifications() }}
@@ -28,4 +34,6 @@
       <div class="govuk-grid-column-one-half">
         {{ radar_entries(model.rings) }}
       </div>
+    </div>
+  </div>
 {% endblock %}

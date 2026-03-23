@@ -1,6 +1,8 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 
+{% set mainClasses = "app-main-wrapper" %}
+
 {% block head %}
   <link href="{{ getAssetPath('stylesheets/application.scss') }}" rel="stylesheet">
 {% endblock %}
@@ -8,17 +10,34 @@
 {% block header %}
   <header class="defra-header" role="banner">
     <div class="defra-header__inner">
-      <a href="/">
-        <img class="defra-header__logo" src="{{ getAssetPath('images/defra-logo.svg') }}" alt="Department for Environment, Food &amp; Rural Affairs">
-      </a>
+    <div class="defra-header__brand-group">
+      <img
+        src="{{ getAssetPath('images/defra-logo.svg') }}"
+        alt="Department for Environment, Food &amp; Rural Affairs"
+        class="defra-header__logo"
+      />
       <a href="/" class="defra-header__service-name">{{ serviceName }}</a>
+    </div>
     </div>
   </header>
   <nav class="defra-service-navigation" aria-label="Service navigation">
     <div class="defra-service-navigation__inner">
       <ul class="defra-service-navigation__list">
-        <li><a class="defra-service-navigation__link" href="/" {% if page == 'home' %}aria-current="page"{% endif %}>Home</a></li>
-        <li><a class="defra-service-navigation__link" href="/about" {% if page == 'about' %}aria-current="page"{% endif %}>About</a></li>
+        <li class="defra-service-navigation__item">
+          <a class="defra-service-navigation__link" href="/" {% if page == 'home' %}aria-current="page"{% endif %}>Home</a>
+        </li>
+        <li class="defra-service-navigation__item">
+          <a class="defra-service-navigation__link" href="/tools" {% if page == 'tools' %}aria-current="page"{% endif %}>Tools</a>
+        </li>
+        <li class="defra-service-navigation__item">
+          <a class="defra-service-navigation__link" href="/frameworks" {% if page == 'frameworks' %}aria-current="page"{% endif %}>Frameworks</a>
+        </li>
+        <li class="defra-service-navigation__item">
+          <a class="defra-service-navigation__link" href="/techniques" {% if page == 'techniques' %}aria-current="page"{% endif %}>Techniques</a>
+        </li>
+        <li class="defra-service-navigation__item">
+          <a class="defra-service-navigation__link" href="/platforms" {% if page == 'platforms' %}aria-current="page"{% endif %}>Platforms</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -28,29 +47,25 @@
   {{ pageTitle if pageTitle else serviceName }} | {{ serviceName }}
 {% endblock %}
 
-{% block main %}
-  <main class="app-main-wrapper" id="main-content">
-    {% block beforeContent %}{% endblock %}
-    {% block content %}{% endblock %}
-  </main>
+{% block beforeContent %}
+  {% if breadcrumbs %}
+    <div class="govuk-width-container govuk-!-margin-bottom-3">
+      {{ govukBreadcrumbs({ items: breadcrumbs }) }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
 {% endblock %}
 
 {% block footer %}
   <footer class="defra-footer" role="contentinfo">
     <div class="govuk-width-container">
-      <ul class="govuk-list" style="display:flex;gap:24px;margin:0;flex-wrap:wrap;">
-        <li><a class="defra-footer__link" href="https://www.gov.uk/help/privacy-notice">Privacy</a></li>
-        <li><a class="defra-footer__link" href="https://www.gov.uk/help/cookies">Cookies</a></li>
-        <li><a class="defra-footer__link" href="https://www.gov.uk/help/accessibility-statement">Accessibility statement</a></li>
-      </ul>
       {% if aceSlackChannel %}
-        <p class="govuk-body-s govuk-!-margin-top-3 govuk-!-margin-bottom-0" style="color:#505a5f;">
+        <p class="govuk-body-s govuk-!-margin-top-3 govuk-!-margin-bottom-0">
           Questions? Contact the AICE team on Slack <a class="defra-footer__link" href="{{ aceSlackChannel }}">#ask-ace</a>
         </p>
       {% endif %}
-      <p class="govuk-body-s govuk-!-margin-top-3 govuk-!-margin-bottom-0" style="color:#505a5f;">
-        &copy; Crown copyright
-      </p>
     </div>
   </footer>
 {% endblock %}

@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% set page = 'tools' %}
+{% set pageTitle = 'Tools' %}
+{% set breadcrumbs = [
+  { text: 'Home', href: '/' },
+  { text: 'Tools' }
+] %}
 
 {% block content %}
   <div class="govuk-width-container">
@@ -17,8 +22,8 @@
     </div>
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-one-half radar-quadrant radar-quadrant--sticky">
-        <object class="radar-svg" id="radar-tools" type="image/svg+xml" data="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.svg') }}">
-          <img src="{{ getAssetPath('assets/tech-radar/aice-tech-radar-tools.png') }}" alt="Tools quadrant">
+        <object class="radar-svg" id="radar-tools" type="image/svg+xml" data="{{ getAssetPath('images/aice-tech-radar-tools.svg') }}">
+          <img src="{{ getAssetPath('images/aice-tech-radar-tools.png') }}" alt="Tools quadrant">
         </object>
         {{ radar_ring_labels('reversed') }}
         {{ status_classifications() }}
