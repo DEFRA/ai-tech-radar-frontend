@@ -97,6 +97,33 @@ entries:
             reason: "Lorem ipsum dolor sit amet."
             nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             updatedTimestamp: "2026-03-03T00:00:00Z"
+      - label: 7
+        title: "Langfuse"
+        id: langfuse
+        description: "A tool for monitoring, managing and evaluating your AI-powered applications, track your prompts, and measure whether they're actually working well."
+        link: ""
+        createdTimestamp: "2026-04-21T10:00:00Z"
+        updatedTimestamp: "2026-04-21T10:00:00Z"
+        active: true
+        history:
+          - ring: "Assess"
+            reason: "Provides observability and evaluation for AI applications, which is critical for scaling and maintaining quality."
+            nextSteps: "Trial with current AI projects, assess integration and value for engineering teams."
+            updatedTimestamp: "2026-04-21T10:00:00Z"
+
+      - label: 8
+        title: "AWS Bedrock AgentCore"
+        id: aws-bedrock-agentcore
+        description: "A managed cloud platform from AWS for running AI agents in production so you don't have to build and maintain all the infrastructure yourself."
+        link: ""
+        createdTimestamp: "2026-04-21T10:00:00Z"
+        updatedTimestamp: "2026-04-21T10:00:00Z"
+        active: true
+        history:
+          - ring: "Assess"
+            reason: "Reduces operational overhead for deploying AI agents by leveraging managed cloud infrastructure."
+            nextSteps: "Trial for agent-based workloads, compare with other cloud offerings, and evaluate fit for our needs."
+            updatedTimestamp: "2026-04-21T10:00:00Z"
     Assess: []
     'Do Not Use': []
   Techniques:
@@ -171,6 +198,33 @@ entries:
             reason: "Lorem ipsum dolor sit amet."
             nextSteps: "Monitor adoption, evaluate integration with internal workflows, and assess security/privacy impacts."
             updatedTimestamp: "2026-03-10T10:00:00Z"
+      - label: 12
+        title: "Claude Code plugin marketplace"
+        id: claude-code-plugin-marketplace
+        description: "An organised way for teams to share AI coding instructions, commands and skills. A future distribution channel for skills our team creates for other departments."
+        link: ""
+        createdTimestamp: "2026-04-21T10:00:00Z"
+        updatedTimestamp: "2026-04-21T10:00:00Z"
+        active: true
+        history:
+          - ring: "Assess"
+            reason: "Promotes knowledge sharing and skill distribution across teams in a structured way."
+            nextSteps: "Monitor adoption, gather feedback from teams, and explore integration with internal workflows."
+            updatedTimestamp: "2026-04-21T10:00:00Z"
+      - label: 13
+        title: "Git AI"
+        id: git-ai
+        description: "Git AI is an open-source tool that tracks which lines of code were written by AI and remembers why they were written. It plugs into Git and works quietly in the background."
+        link: ""
+        createdTimestamp: "2026-04-21T10:00:00Z"
+        updatedTimestamp: "2026-04-21T10:00:00Z"
+        active: true
+        history:
+          - ring: "Assess"
+            reason: "Enables transparency and traceability for AI-generated code, providing quick value for engineering teams."
+            nextSteps: "Pilot with selected teams, collect feedback, and evaluate integration with existing workflows."
+            updatedTimestamp: "2026-04-21T10:00:00Z"
     Pilot: []
     Assess: []
     'Do Not Use': []
+    
