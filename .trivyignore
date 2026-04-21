@@ -13,3 +13,10 @@
 # Created: 2025-11-26
 # Expires: 2026-10-31
 CVE-2020-26311 exp:2026-10-31
+
+# serialize-javascript - CPU Exhaustion DoS via crafted array-like objects
+# Reason: False positive - copy-webpack-plugin@14.0.0 includes serialize-javascript@7.0.3 which is not vulnerable.
+# npm audit advisory database has not been updated to reflect this fix.
+# Created: 2026-04-21
+# Expires: 2026-10-31
+GHSA-qj8w-gfj5-8c6v exp:2026-10-31
