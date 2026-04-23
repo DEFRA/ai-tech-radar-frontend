@@ -97,6 +97,7 @@ entries:
             reason: "Lorem ipsum dolor sit amet."
             nextSteps: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             updatedTimestamp: "2026-03-03T00:00:00Z"
+    Assess:
       - label: 7
         title: "Langfuse"
         id: langfuse
@@ -124,7 +125,6 @@ entries:
             reason: "Reduces operational overhead for deploying AI agents by leveraging managed cloud infrastructure."
             nextSteps: "Trial for agent-based workloads, compare with other cloud offerings, and evaluate fit for our needs."
             updatedTimestamp: "2026-04-21T10:00:00Z"
-    Assess: []
     'Do Not Use': []
   Techniques:
     Endorse:
@@ -198,6 +198,8 @@ entries:
             reason: "Lorem ipsum dolor sit amet."
             nextSteps: "Monitor adoption, evaluate integration with internal workflows, and assess security/privacy impacts."
             updatedTimestamp: "2026-03-10T10:00:00Z"
+    Pilot: []
+    Assess:
       - label: 12
         title: "Claude Code plugin marketplace"
         id: claude-code-plugin-marketplace
@@ -224,7 +226,5 @@ entries:
             reason: "Enables transparency and traceability for AI-generated code, providing quick value for engineering teams."
             nextSteps: "Pilot with selected teams, collect feedback, and evaluate integration with existing workflows."
             updatedTimestamp: "2026-04-21T10:00:00Z"
-    Pilot: []
-    Assess: []
     'Do Not Use': []
     
